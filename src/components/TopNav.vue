@@ -54,7 +54,7 @@
 </template>
 
 <script>
-import {eventBus} from "../main";
+import { eventBus } from "../main";
 
 export default {
   data() {
@@ -66,12 +66,10 @@ export default {
     menuEnter() {
       this.menuHover = true;
       eventBus.$emit("munuHoverUpdate", this.menuHover);
-      // this.$emit("munuHoverUpdate", this.menuHover);
     },
     menuLeave() {
       this.menuHover = false;
       eventBus.$emit("munuHoverUpdate", this.menuHover);
-      // this.$emit("munuHoverUpdate", this.menuHover);
     }
   }
 };
@@ -89,7 +87,6 @@ export default {
   align-items: center;
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
-  padding-right: 2.7rem;
   transition: background-color 0.3s;
   \ span {
     font-weight: 700;
@@ -105,14 +102,12 @@ export default {
   }
 
   &__logo {
-    &-link {
-    }
     height: 100%;
     width: 100%;
     display: flex;
 
     &-img {
-      width: 330px;
+      width: 340px;
     }
   }
 

@@ -1,19 +1,13 @@
 <template>
-  <!-- ... -->
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <!-- It is important to set "left" style prop on every slide -->
-      <div
-        class="swiper-slide"
-        v-for="(slide, index) in virtualData.slides"
-        :key="index"
-        :style="{ left: `${virtualData.offset}px` }"
-      >
-        {{ slide }}
-      </div>
+      <picture class="swiper-slide" v-for="slide in slides" :key="slide.id">
+        <source media="(orientation: portrait)" :srcset="slide[0]" />
+        <source media="(orientation: landscape)" :srcset="slide[1]" />
+        <img :src="slide[1]" />
+      </picture>
     </div>
   </div>
-  <!-- ... -->
 </template>
 <script>
 import Swiper from "swiper/js/swiper.esm.bundle";
@@ -21,32 +15,44 @@ import Swiper from "swiper/js/swiper.esm.bundle";
 export default {
   data() {
     return {
-      // dummy slides data
-      slides: (function() {
-        var slides = [];
-        for (var i = 0; i < 600; i += 1) {
-          slides.push("Slide " + (i + 1));
-        }
-        return slides;
-      })(),
-      // virtual data
-      virtualData: {
-        slides: []
-      }
+      slides: [
+        [
+          require("../assets/img/rsz_banner1.jpg"),
+          require("../assets/img/rsz_banner2.jpg"),
+        ],
+        [
+          require("../assets/img/portrait_0.jpg"),
+          require("../assets/img/landscape_0.jpg"),
+        ],
+      ],
+      virtualData: [],
     };
   },
   mounted() {
-    const self = this;
     const swiper = new Swiper(".swiper-container", {
-      virtual: {
-        slides: self.slides,
-        renderExternal(data) {
-          // assign virtual slides data
-          self.virtualData = data;
-        }
-      }
+      loop: true,
     });
     return swiper;
-  }
+  },
 };
 </script>
+
+<style lang="scss">
+.swiper {
+  &-container {
+    width: 100%;
+  }
+
+  &-wrapper {
+    width: 100%;
+  }
+
+  &-slide {
+    width: 100%;
+
+    img {
+      width: 100%;
+    }
+  }
+}
+</style>

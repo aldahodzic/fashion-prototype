@@ -12,9 +12,12 @@
       </svg>
     </div>
     <div class="header__logo">
-      <a href="" class="header__logo-link">
+      <!-- <a href="" class="header__logo-link">
         <img class="header__logo-img" src="@/assets/img/logo_brand.svg" />
-      </a>
+      </a> -->
+      <router-link to="/">
+        <img class="header__logo-img" src="@/assets/img/logo_brand.svg"
+      /></router-link>
     </div>
     <div class="header__search">
       <a href="#" class="header__search__link">
@@ -22,7 +25,6 @@
         <span class="header__search__link-line"></span>
       </a>
     </div>
-
     <div class="header__user">
       <ul class="header__user__menu">
         <li class="header__user__menu-login">
@@ -59,7 +61,7 @@ import { eventBus } from "../main";
 export default {
   data() {
     return {
-      menuHover: false
+      menuHover: false,
     };
   },
   methods: {
@@ -70,8 +72,8 @@ export default {
     menuLeave() {
       this.menuHover = false;
       eventBus.$emit("munuHoverUpdate", this.menuHover);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -82,13 +84,15 @@ export default {
   z-index: 10;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(65px, 3.8%) 20.2% 55% 20%;
+  grid-template-columns: minmax(65px, 5%) 20% 55% 20%;
   justify-items: center;
   align-items: center;
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
   transition: background-color 0.3s;
-  \ span {
+  overflow: hidden;
+
+  span {
     font-weight: 700;
   }
 
@@ -130,6 +134,7 @@ export default {
     display: flex;
     justify-content: flex-end;
     width: 100%;
+    padding-right: 10px;
 
     &__menu {
       display: flex;
@@ -174,5 +179,22 @@ export default {
       }
     }
   }
+}
+
+.box {
+  width: 100%;
+  height: 100px;
+}
+.red {
+  background-color: red;
+}
+.blue {
+  background-color: blue;
+}
+.green {
+  background-color: green;
+}
+.orange {
+  background-color: orange;
 }
 </style>

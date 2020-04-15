@@ -137,6 +137,28 @@
         </button>
       </div>
     </div>
+    <ul class="footer__socialmedia">
+      <li class="footer__socialmedia__list">
+        <a href="">INSTAGRAM</a>
+      </li>
+      <li class="footer__socialmedia__list">
+        <a href="">FACEBOOK</a>
+      </li>
+      <li class="footer__socialmedia__list">
+        <a href="">TWITTER</a>
+      </li>
+      <li class="footer__socialmedia__list">
+        <a href="">PINTEREST</a>
+      </li>
+      <li class="footer__socialmedia__list">
+        <a href="">YOUTUBE</a>
+      </li>
+    </ul>
+    <ul class="footer__term">
+      <li class="footer__term__list"><a href="">PRIVACY POLICY</a></li>
+      |
+      <li class="footer__term__list"><a href=""></a>TERMS OF USE</li>
+    </ul>
   </footer>
 </template>
 
@@ -183,7 +205,7 @@ export default {
     text-align: center;
 
     &-title {
-      font-size: 4rem;
+      font-size: 3.5rem;
       letter-spacing: 0.3px;
       margin-bottom: 3rem;
     }
@@ -202,7 +224,7 @@ export default {
       }
 
       &__label {
-        font-size: 2rem;
+        font-size: 1.5rem;
         position: absolute;
         margin-top: 8px;
         letter-spacing: 0.2px;
@@ -251,7 +273,7 @@ export default {
         }
 
         &__label {
-          font-size: 2rem;
+          font-size: 1.6rem;
           display: block;
           margin: 0 auto;
           width: 11rem;
@@ -292,7 +314,7 @@ export default {
         }
 
         &__label {
-          font-size: 2rem;
+          font-size: 1.6rem;
           display: inline;
           margin: 0 auto;
           text-align: left;
@@ -337,6 +359,31 @@ export default {
         padding: 0 17px;
         letter-spacing: 0.05em;
       }
+    }
+  }
+
+  &__socialmedia {
+    margin-top: 100px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+
+    &__list {
+      margin: 1rem 2rem;
+      font-size: 1.25rem;
+    }
+  }
+
+  &__term {
+    margin: 100px 10px;
+    display: flex;
+    justify-content: flex-end;
+
+    &__list {
+      font-size: 1.25rem;
+      padding-right: 5px;
+            padding-left: 5px;
+
     }
   }
 }

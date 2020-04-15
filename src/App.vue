@@ -2,11 +2,6 @@
   <div id="app">
     <TopNav></TopNav>
     <SideBar></SideBar>
-    <Swiper></Swiper>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
     <router-view />
     <Footer></Footer>
   </div>
@@ -15,14 +10,12 @@
 <script>
 import TopNav from "@/components/TopNav.vue";
 import SideBar from "@/components/SideBar.vue";
-import Swiper from "@/components/Swiper.vue";
 import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     TopNav,
     SideBar,
-    Swiper,
     Footer,
   },
 };

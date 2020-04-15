@@ -1,11 +1,13 @@
 <template>
   <div
+    id="nav"
     class="sidebar"
     :class="{ expand: menuHover }"
     @mouseenter="menuHover = true"
     @mouseleave="menuHover = false"
   >
-    <h1>sideBar</h1>
+    <router-link to="/">Home</router-link> |
+    <router-link to="/about">About</router-link>
   </div>
 </template>
 
@@ -15,15 +17,15 @@ import { eventBus } from "../main";
 export default {
   data() {
     return {
-      menuHover: false
+      menuHover: false,
     };
   },
 
   created() {
-    eventBus.$on("munuHoverUpdate", menuUpdate => {
+    eventBus.$on("munuHoverUpdate", (menuUpdate) => {
       this.menuHover = menuUpdate;
     });
-  }
+  },
 };
 </script>
 

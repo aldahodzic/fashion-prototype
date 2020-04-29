@@ -3,20 +3,17 @@
     <TopNav></TopNav>
     <SideBar></SideBar>
     <router-view />
-    <Footer></Footer>
   </div>
 </template>
 
 <script>
 import TopNav from "@/components/TopNav.vue";
 import SideBar from "@/components/SideBar.vue";
-import Footer from "@/components/Footer.vue";
 
 export default {
   components: {
     TopNav,
     SideBar,
-    Footer,
   },
 };
 </script>

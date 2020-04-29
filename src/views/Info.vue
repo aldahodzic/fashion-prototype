@@ -1,11 +1,17 @@
 <template>
   <div>
-    <h1>This is info</h1>
+    <router-view></router-view>
+    <FooterTwo></FooterTwo>
   </div>
 </template>
 
 <script>
-export default {};
+import FooterTwo from "@/components/FooterTwo.vue";
+export default {
+  components: {
+    FooterTwo,
+  },
+};
 </script>
 
 <style lang="scss" scoped></style>

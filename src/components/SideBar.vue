@@ -6,8 +6,6 @@
     @mouseenter="menuHover = true"
     @mouseleave="menuHover = false"
   >
-    <!-- <router-link to="/">Home</router-link> | -->
-    <!-- <router-link to="/about">About</router-link> -->
     <ul class="sidebar__menu__level1-wrapper">
       <li
         class="sidebar__menu__level1-list"
@@ -87,9 +85,8 @@
         :key="level1.id"
       >
         <a
-          :href="level1.link"
           class="sidebar__info__level1-link"
-          @click.prevent="levelSelected(info, level1)"
+          @click="levelSelected(info, level1)"
           >{{ level1.name }}</a
         >
         <ul
@@ -97,19 +94,21 @@
           v-if="level1.level2"
           :class="{ sidebarExpand: level1.selected }"
         >
-          <li
+          <router-link
             class="sidebar__info__level2-list"
             v-for="level2 in level1.level2"
             :key="level2.id"
+            :to="level2.link"
+            tag="ul"
           >
             <a
               :href="level2.link"
               class="sidebar__info__level2-link"
-              @click.prevent="levelSelected(level1.level2, level2)"
+              @click="levelSelected(level1.level2, level2)"
               :class="{ sidebarBold: level2.selected }"
               >{{ level2.name }}</a
             >
-          </li>
+          </router-link>
         </ul>
       </li>
     </ul>
@@ -300,15 +299,11 @@ export default {
       info: [
         {
           name: "+ info",
-          link: "#",
           selected: false,
           level2: [
-            { name: "newsletter", link: "#", selected: false },
-            { name: "contact us", link: "#", selected: false },
-            { name: "stores", link: "#", selected: false },
-            { name: "helps", link: "#", selected: false },
-            { name: "press", link: "#", selected: false },
-            { name: "company", link: "#", selected: false },
+            { name: "newsletter", link: "/newsletter", selected: false },
+            { name: "contact us", link: "/contact", selected: false },
+            { name: "returns", link: "/returns", selected: false },
           ],
         },
       ],
@@ -430,6 +425,7 @@ export default {
       }
       &-link {
         font-size: 1.7rem;
+        cursor: pointer;
       }
     }
     &__level2 {

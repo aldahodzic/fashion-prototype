@@ -382,8 +382,7 @@ export default {
     &__list {
       font-size: 1.25rem;
       padding-right: 5px;
-            padding-left: 5px;
-
+      padding-left: 5px;
     }
   }
 }

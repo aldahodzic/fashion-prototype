@@ -343,7 +343,7 @@ export default {
   max-width: 420px;
   height: 100%;
   background-color: white;
-  // left: -400px;
+  left: -400px;
   top: 0;
   padding: 80px 45px 0 30px;
   z-index: 20;

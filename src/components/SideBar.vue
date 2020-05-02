@@ -122,191 +122,6 @@ export default {
   data() {
     return {
       menuHover: false,
-      sidebars: [
-        {
-          name: "woman",
-          link: "#",
-          selected: false,
-          level2: [
-            { name: "new in", link: "#", selected: false },
-            {
-              name: "collection",
-              link: "#",
-              selected: false,
-              level3: [
-                { name: "must have", link: "#", selected: false },
-                {
-                  name: "trench | jackets",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "jackets", link: "#", selected: false },
-                    { name: "Trench Coats", link: "#", selected: false },
-                    { name: "Denim", link: "#", selected: false },
-                  ],
-                },
-                {
-                  name: "dresses | numpsuites",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "short", link: "#", selected: false },
-                    { name: "midi", link: "#", selected: false },
-                    { name: "maxi", link: "#", selected: false },
-                  ],
-                },
-              ],
-            },
-            { name: "stories", link: "#" },
-          ],
-        },
-        {
-          name: "man",
-          link: "#",
-          selected: false,
-          level2: [
-            { name: "new in", link: "#", selected: false },
-            {
-              name: "collection",
-              link: "#",
-              selected: false,
-              level3: [
-                { name: "must have", link: "#", selected: false },
-                {
-                  name: "trench | jackets",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "jackets", link: "#", selected: false },
-                    { name: "Trench Coats", link: "#", selected: false },
-                    { name: "Denim", link: "#", selected: false },
-                  ],
-                },
-                { name: "blazers", link: "#", selected: false },
-                {
-                  name: "dresses | numpsuites",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "short", link: "#", selected: false },
-                    { name: "midi", link: "#", selected: false },
-                    { name: "maxi", link: "#", selected: false },
-                  ],
-                },
-              ],
-            },
-            { name: "stories", link: "#", selected: false },
-          ],
-        },
-        {
-          name: "kids",
-          link: "#",
-          selected: false,
-          level2: [
-            { name: "new in", link: "#", selected: false },
-            {
-              name: "collection",
-              link: "#",
-              selected: false,
-              level3: [
-                { name: "must have", link: "#", selected: false },
-                {
-                  name: "trench | jackets",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "jackets", link: "#", selected: false },
-                    { name: "Trench Coats", link: "#", selected: false },
-                    { name: "Denim", link: "#", selected: false },
-                  ],
-                },
-                { name: "blazers", link: "#", selected: false },
-                {
-                  name: "dresses | numpsuites",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "short", link: "#", selected: false },
-                    { name: "midi", link: "#", selected: false },
-                    { name: "maxi", link: "#", selected: false },
-                  ],
-                },
-              ],
-            },
-            { name: "stories", link: "#", selected: false },
-          ],
-        },
-        {
-          name: "shoes & bags",
-          link: "#",
-          selected: false,
-          level2: [
-            { name: "new in", link: "#", selected: false },
-            {
-              name: "collection",
-              link: "#",
-              selected: false,
-              level3: [
-                { name: "must have", link: "#", selected: false },
-                {
-                  name: "trench | jackets",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "jackets", link: "#", selected: false },
-                    { name: "Trench Coats", link: "#", selected: false },
-                    { name: "Denim", link: "#", selected: false },
-                  ],
-                },
-                { name: "blazers", link: "#", selected: false },
-                {
-                  name: "dresses | numpsuites",
-                  link: "#",
-                  selected: false,
-                  level4: [
-                    { name: "view all", link: "#", selected: false },
-                    { name: "short", link: "#", selected: false },
-                    { name: "midi", link: "#", selected: false },
-                    { name: "maxi", link: "#", selected: false },
-                  ],
-                },
-              ],
-            },
-            { name: "stories", link: "#", selected: false },
-          ],
-        },
-        {
-          name: "join life",
-          link: "#",
-          selected: false,
-          level2: [
-            { name: "join life collection", link: "#", selected: false },
-            { name: "commitments", link: "#", selected: false },
-            { name: "clothes collecting", link: "#", selected: false },
-            { name: "products", link: "#", selected: false },
-            { name: "suppliers", link: "#", selected: false },
-            { name: "stores", link: "#", selected: false },
-          ],
-        },
-      ],
-      info: [
-        {
-          name: "+ info",
-          selected: false,
-          level2: [
-            { name: "newsletter", link: "/newsletter", selected: false },
-            { name: "contact us", link: "/contact", selected: false },
-            { name: "returns", link: "/returns", selected: false },
-          ],
-        },
-      ],
     };
   },
   created() {
@@ -315,9 +130,6 @@ export default {
     });
   },
   methods: {
-    sidebarsSelected(level, index) {
-      this.$refs[level][index].style.color = "red";
-    },
     levelSelected(sameLevel, thisLevel) {
       sameLevel.forEach(level => {
         if (level != thisLevel) {
@@ -326,6 +138,14 @@ export default {
           thisLevel.selected = !thisLevel.selected;
         }
       });
+    },
+  },
+  computed: {
+    sidebars() {
+      return this.$store.getters.getSidebars;
+    },
+    info() {
+      return this.$store.getters.getInfo;
     },
   },
 };
@@ -338,7 +158,7 @@ export default {
   max-width: 420px;
   height: 100%;
   background-color: white;
-  left: -400px;
+  // left: -400px;
   top: 0;
   padding: 80px 45px 0 30px;
   z-index: 20;

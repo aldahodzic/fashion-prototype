@@ -1,20 +1,21 @@
 <template>
   <footer class="footerTwo">
+    <hr />
     <nav class="footerTwo__menus-box">
       <ul class="footerTwo__menus-wrapper">
         <li
           class="footerTwo__menus-list"
-          v-for="untility in untilities"
-          :key="untility.id"
+          v-for="utility in utilities"
+          :key="utility.id"
         >
           <a class="footerTwo__menus-link">
-            {{ untility.name }}
+            {{ utility.name }}
           </a>
           <ul class="footerTwo__menus__sub-wrapper">
             <router-link
               tag="li"
               class="footerTwo__menus__sub-list"
-              v-for="sub in untility.subs"
+              v-for="sub in utility.subs"
               :key="sub.id"
               :to="sub.link"
             >
@@ -24,6 +25,7 @@
         </li>
       </ul>
     </nav>
+    <hr />
     <div class="footerTwo__languages">
       <div class="footerTwo__languages__countries">
         <p class="footerTwo__languages__countries-country">thailand</p>
@@ -56,48 +58,12 @@
 <script>
 export default {
   data() {
-    return {
-      untilities: [
-        {
-          name: "help",
-          subs: [
-            { name: "shop at noproblemfashion.com", link: "#" },
-            { name: "product", link: "#" },
-            { name: "payment", link: "#" },
-            { name: "shipping", link: "#" },
-            { name: "exchanges and returns", link: "#" },
-            { name: "shops and company", link: "#" },
-            { name: "my account", link: "#" },
-          ],
-        },
-        {
-          name: "follow us",
-          subs: [
-            { name: "newsletter", link: "#" },
-            { name: "instagram", link: "#" },
-            { name: "facebook", link: "#" },
-            { name: "twitter", link: "#" },
-            { name: "pintwerest", link: "#" },
-            { name: "youtube", link: "#" },
-          ],
-        },
-        {
-          name: "company",
-          subs: [
-            { name: "about us", link: "#" },
-            { name: "offices", link: "#" },
-            { name: "stores", link: "#" },
-          ],
-        },
-        {
-          name: "policies",
-          subs: [
-            { name: "privacy policy", link: "#" },
-            { name: "purchase conditions", link: "#" },
-          ],
-        },
-      ],
-    };
+    return {};
+  },
+  computed: {
+    utilities() {
+      return this.$store.getters.getUtilities;
+    },
   },
 };
 </script>

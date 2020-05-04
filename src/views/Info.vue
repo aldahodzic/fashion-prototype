@@ -1,6 +1,8 @@
 <template>
-  <div>
-    <router-view></router-view>
+  <div class="info__page">
+    <div class="info__content">
+      <router-view></router-view>
+    </div>
     <FooterTwo></FooterTwo>
   </div>
 </template>
@@ -14,4 +16,17 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.info {
+  &__content {
+    // width: 50%;
+    // margin: 0 auto;
+    text-align: left;
+
+    padding-top: 40px;
+    min-height: 530px;
+    padding-left: 368px;
+    padding-right: 32px;
+  }
+}
+</style>

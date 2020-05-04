@@ -5,7 +5,7 @@
         JOIN OUR NEWSLETTER
       </h2>
 
-      <form action="" class="footer__subscribe-form">
+      <form class="footer__subscribe-form">
         <fieldset>
           <div class="footer__subscribe-form-entry">
             <label
@@ -15,8 +15,9 @@
               >Enter your email address here</label
             >
             <input
-              type="text"
-              name="email"
+              type="email"
+              name="newsletter-email"
+              id="newsletter-email"
               class="footer__subscribe-form__input"
               autocomplete="off"
               maxlength="100"
@@ -36,12 +37,12 @@
                 type="checkbox"
                 name="woman"
                 value="woman"
-                id="woman"
+                id="footer__subscribe__additional__box__input-woman"
                 v-model="subscribeList"
               />
               <label
                 class="footer__subscribe__additional__box__label"
-                for="woman"
+                for="footer__subscribe__additional__box__input-woman"
                 ><span class="footer__subscribe__additional__box__checkbox"
                   ><i
                     class="footer__subscribe__additional__box__checkbox-icon fas fa-check"
@@ -54,10 +55,12 @@
                 type="checkbox"
                 name="man"
                 value="man"
-                id="man"
+                id="footer__subscribe__additional__box__input-man"
                 v-model="subscribeList"
               />
-              <label class="footer__subscribe__additional__box__label" for="man"
+              <label
+                class="footer__subscribe__additional__box__label"
+                for="footer__subscribe__additional__box__input-man"
                 ><span class="footer__subscribe__additional__box__checkbox"
                   ><i
                     class="footer__subscribe__additional__box__checkbox-icon fas fa-check"
@@ -70,10 +73,12 @@
                 type="checkbox"
                 name="kid"
                 value="kid"
-                id="kid"
+                id="footer__subscribe__additional__box__input-kid"
                 v-model="subscribeList"
               />
-              <label class="footer__subscribe__additional__box__label" for="kid"
+              <label
+                class="footer__subscribe__additional__box__label"
+                for="footer__subscribe__additional__box__input-kid"
                 ><span class="footer__subscribe__additional__box__checkbox"
                   ><i
                     class="footer__subscribe__additional__box__checkbox-icon fas fa-check"
@@ -89,10 +94,12 @@
                 type="checkbox"
                 name="policy"
                 value="policy"
-                id="policy"
+                id="footer__subscribe__policy__box__input"
                 v-model="privacyAgree"
               />
-              <label class="footer__subscribe__policy__box__label" for="policy"
+              <label
+                class="footer__subscribe__policy__box__label"
+                for="footer__subscribe__policy__box__input"
                 ><span class="footer__subscribe__policy__box__checkbox"
                   ><i
                     class="footer__subscribe__policy__box__checkbox-icon fas fa-check"
@@ -107,6 +114,7 @@
           </fieldset>
         </div>
       </form>
+
       <div class="footer__subscribe__submit">
         <button
           class="footer__subscribe__submit-btn btn"
@@ -267,79 +275,25 @@ export default {
         position: relative;
         margin-bottom: 4.4rem;
 
-        &__input {
-          display: none;
-          position: absolute;
-        }
-
         &__label {
           font-size: 1.6rem;
-          display: block;
           margin: 0 auto;
           width: 11rem;
           text-align: left;
         }
-
-        &__checkbox {
-          height: 16px;
-          width: 16px;
-          border: 1px solid black;
-          margin-right: 8px;
-          cursor: pointer;
-          display: inline-block;
-          vertical-align: middle;
-          position: relative;
-
-          &-icon {
-            font-size: 1.5rem;
-            opacity: 0;
-            position: absolute;
-          }
-        }
-
-        &__input:checked + &__label &__checkbox &__checkbox-icon {
-          opacity: 1;
-        }
+  
       }
     }
     &__policy {
       padding-top: 5rem;
       &__box {
-        position: relative;
         margin-bottom: 4.4rem;
-
-        &__input {
-          display: none;
-          position: absolute;
-        }
 
         &__label {
           font-size: 1.6rem;
-          display: inline;
-          margin: 0 auto;
-          text-align: left;
           color: #7a7a7a;
         }
 
-        &__checkbox {
-          height: 16px;
-          width: 16px;
-          border: 1px solid black;
-          margin-right: 8px;
-          cursor: pointer;
-          display: inline-block;
-          vertical-align: middle;
-
-          &-icon {
-            font-size: 1.5rem;
-            position: absolute;
-            opacity: 0;
-          }
-        }
-
-        &__input:checked + &__label &__checkbox &__checkbox-icon {
-          opacity: 1;
-        }
       }
 
       &-link {

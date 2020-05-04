@@ -99,7 +99,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: black;
 }
 
 a,
@@ -129,8 +129,43 @@ ol {
 //     }
 //   }
 // }
+p {
+  font-size: 1.4rem;
+}
 
 .header span {
   font-weight: 700;
+}
+
+input[type="checkbox"][class$="__input"] {
+  display: none;
+  position: absolute;
+}
+label[class$="__label"] {
+  display: block;
+}
+span[class$="__checkbox"] {
+  height: 16px;
+  width: 16px;
+  border: 1px solid black;
+  margin-right: 8px;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+[class$="__checkbox-icon"] {
+  font-size: 15px;
+  opacity: 0;
+  position: absolute;
+  left: 0;
+}
+
+input[type="checkbox"][class$="__input"]:checked
+  + label[class$="__label"]
+  span[class$="__checkbox"]
+  [class$="__checkbox-icon"] {
+  opacity: 1;
 }
 </style>

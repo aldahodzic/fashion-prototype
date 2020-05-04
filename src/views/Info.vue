@@ -23,7 +23,7 @@ export default {
     // margin: 0 auto;
     text-align: left;
 
-    padding-top: 40px;
+    padding-top: 50px;
     min-height: 530px;
     padding-left: 368px;
     padding-right: 32px;

@@ -138,7 +138,7 @@
         </p>
         <button
           type="button"
-          class="modal__button"
+          class="modal__btn btn-main"
           @click="validSubInput = true"
         >
           ACCEPT
@@ -349,56 +349,4 @@ export default {
   opacity: 0;
 }
 
-.modal {
-  &__container {
-    background-color: rgba(255, 255, 255, 0.7);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 500;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  &__box {
-    border: 1px solid black;
-    background-color: white;
-    z-index: 501;
-    padding: 30px 100px;
-  }
-
-  &__icon {
-    font-size: 20px;
-    margin: 0 auto 25px;
-  }
-
-  &__warning {
-    margin-bottom: 25px;
-    font-size: 18px;
-    letter-spacing: 0.3px;
-    text-transform: uppercase;
-  }
-  &__prompt {
-    margin-bottom: 1em;
-    font-size: 1.2rem;
-  }
-  &__button {
-    min-width: 165px;
-    width: auto;
-    height: 40px;
-    line-height: 40px;
-    margin: 5px 0 20px;
-    padding: 0 1.5em;
-    background-color: #000;
-    color: white;
-    border: none;
-    font-size: 1.6rem;
-    font-weight: 700;
-    &:hover {
-      background-color: #cccccc;
-    }
-  }
-}
 </style>

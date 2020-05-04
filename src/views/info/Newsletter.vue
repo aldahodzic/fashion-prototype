@@ -1,20 +1,20 @@
 <template>
-  <div class="newsletter-page__container">
+  <section class="newsletter-page__container">
     <h1 class="newsletter-page__header">Newsletter</h1>
     <p lass="newsletter-page__para">
       Subscribe to our Newsletter and we will send you news and information
       about new trends every week.
     </p>
-    <Newsletter></Newsletter>
-  </div>
+    <Subscribe></Subscribe>
+  </section>
 </template>
 
 <script>
-import Newsletter from "@/components/Newsletter.vue";
+import Subscribe from "@/components/Subscribe.vue";
 
 export default {
   components: {
-    Newsletter,
+    Subscribe,
   },
 };
 </script>
@@ -22,7 +22,7 @@ export default {
 <style lang="scss" scoped>
 .newsletter-page {
   &__header {
-    padding: 20px 0 0;
+    padding: 20px 0 10px;
     font-size: 2.2rem;
   }
   &__para {

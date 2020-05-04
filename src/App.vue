@@ -115,6 +115,7 @@ a:hover {
 ul,
 ol {
   list-style-type: none;
+  margin: 0;
 }
 
 // #nav {
@@ -167,5 +168,74 @@ input[type="checkbox"][class$="__input"]:checked
   span[class$="__checkbox"]
   [class$="__checkbox-icon"] {
   opacity: 1;
+}
+
+.btn {
+  &-main {
+    display: inline-block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    border-radius: ".5em";
+    border: none;
+    font-size: 16px;
+    height: 40px;
+    min-width: 165px;
+    width: auto;
+    letter-spacing: 0.2px;
+    font-stretch: condensed;
+    font-weight: 700;
+    background-color: black;
+    border: 1px solid black;
+    color: white;
+    position: relative;
+    text-transform: uppercase;
+
+    &:hover {
+      background-color: #cccccc;
+      border: 1px solid white;
+      outline-color: white;
+    }
+  }
+}
+
+.modal {
+  &__container {
+    background-color: rgba(255, 255, 255, 0.7);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  &__box {
+    border: 1px solid #cccc;
+    background-color: white;
+    z-index: 501;
+    padding: 30px;
+    width: 400px;
+  }
+
+  &__icon {
+    font-size: 20px;
+    margin: 0 auto 25px;
+  }
+
+  &__warning {
+    margin-bottom: 25px;
+    font-size: 18px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  &__prompt {
+    margin-bottom: 1em;
+    font-size: 1.2rem;
+    white-space: pre;
+  }
 }
 </style>

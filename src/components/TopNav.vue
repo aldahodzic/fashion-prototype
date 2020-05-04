@@ -84,7 +84,7 @@ export default {
   z-index: 10;
   width: 100%;
   display: grid;
-  grid-template-columns: minmax(65px, 5%) 20% 55% 20%;
+  grid-template-columns: minmax(65px, 5%) 20% 52% 23%;
   justify-items: center;
   align-items: center;
   padding-top: 2.5rem;
@@ -100,9 +100,8 @@ export default {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: center;
-    padding-left: 16px;
   }
 
   &__logo {
@@ -133,8 +132,9 @@ export default {
   &__user {
     display: flex;
     justify-content: flex-end;
+
     width: 100%;
-    padding-right: 10px;
+    padding-right: 40px;
 
     &__menu {
       display: flex;
@@ -179,22 +179,5 @@ export default {
       }
     }
   }
-}
-
-.box {
-  width: 100%;
-  height: 100px;
-}
-.red {
-  background-color: red;
-}
-.blue {
-  background-color: blue;
-}
-.green {
-  background-color: green;
-}
-.orange {
-  background-color: orange;
 }
 </style>

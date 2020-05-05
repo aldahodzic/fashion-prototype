@@ -26,14 +26,15 @@
             :class="{
               inputFocus: emailFocus,
               inputError:
-                emailWasFocus &&
-                !emailFocus &&
-                (!$v.email.required || !$v.email.email),
+                emailWasFocus && (!$v.email.required || !$v.email.email),
             }"
           />
           <p
             class="subscribe__form__email__input-warning"
-            :class="{ warningVisible: emailWasFocus }"
+            :class="{
+              warningVisible:
+                emailWasFocus && (!$v.email.email || !$v.email.required),
+            }"
           >
             {{ inputWarning }}
           </p>
@@ -118,7 +119,7 @@
         <div class="subscribe__form__submit">
           <button
             class="subscribe__form__submit-btn btn-main"
-            @click.prevent="subscribe"
+            @click.stop.prevent="subscribe"
           >
             SUBSCRIBE
           </button>
@@ -132,14 +133,13 @@
         <p class="modal__prompt">
           {{ prompt }}
         </p>
-        <router-link
-          tag="button"
+        <button
           type="button"
           class="modal__btn btn-main"
           @click="modalShow = false"
         >
           ACCEPT
-        </router-link>
+        </button>
       </div>
     </div>
   </section>
@@ -183,6 +183,14 @@ export default {
       } else if (!this.privacy) {
         this.prompt = "You must accept the privacy policy.";
         this.modalShow = true;
+      } else {
+        this.$store.commit("updateSubscribeDetail", [
+          this.email,
+          this.woman,
+          this.man,
+          this.kids,
+        ]);
+        this.$router.push("/confirm/subscribe");
       }
     },
   },
@@ -315,7 +323,4 @@ button[class*="__submit-btn"] {
   font-weight: 400;
 }
 
-button[class$="-btn"] {
-  color: red;
-}
 </style>

@@ -15,6 +15,7 @@ export default {
     TopNav,
     SideBar,
   },
+
 };
 </script>
 

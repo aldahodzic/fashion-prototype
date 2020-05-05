@@ -78,7 +78,6 @@ export default {
   watch: {
     $route: function() {
       let routeName = this.$route.name;
-      console.log(routeName);
       if (routeName == "Home") {
         this.headerTran = true;
       } else {

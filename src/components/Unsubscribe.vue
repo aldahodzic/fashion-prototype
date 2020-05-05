@@ -27,14 +27,15 @@
             :class="{
               inputFocus: emailFocus,
               inputError:
-                emailWasFocus &&
-                !emailFocus &&
-                (!$v.email.required || !$v.email.email),
+                emailWasFocus && (!$v.email.required || !$v.email.email),
             }"
           />
           <p
             class="unsubscribe__form__email__input-warning"
-            :class="{ warningVisible: emailWasFocus }"
+            :class="{
+              warningVisible:
+                emailWasFocus && (!$v.email.email || !$v.email.required),
+            }"
           >
             {{ inputWarning }}
           </p>
@@ -42,7 +43,7 @@
         <div class="unsubscribe__form__submit">
           <button
             class="unsubscribe__form__submit-btn btn-main"
-            @click.prevent="subscribe"
+            @click.prevent="unsubscribe"
           >
             UNSUBSCRIBE
           </button>
@@ -70,14 +71,17 @@ export default {
     },
   },
   methods: {
-    subscribe() {
-      if (!this.$v.email.required) {
+    unsubscribe() {
+      if (!this.$v.email.required || !this.$v.email.email) {
         document.getElementById("unSubemail").scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "nearest",
         });
         this.emailWasFocus = true;
+      } else {
+        this.$store.commit("updateUnsubscribeEmail", this.email);
+        this.$router.push("/confirm/unsubscribe");
       }
     },
   },

@@ -24,13 +24,11 @@ const routes = [
         path: "/newsletter",
         name: "Newsletter",
         component: Newsletter,
-        children: [
-          {
-            path: "/confirm",
-            name: "Confirm",
-            component: Confirm,
-          },
-        ],
+      },
+      {
+        path: "/confirm/:method",
+        name: "Confirm",
+        component: Confirm,
       },
       {
         path: "/contact",

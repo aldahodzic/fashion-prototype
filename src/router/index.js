@@ -5,6 +5,7 @@ import Info from "../views/Info.vue";
 import Newsletter from "../views/info/Newsletter.vue";
 import Contact from "../views/info/Contact.vue";
 import Returns from "../views/info/Returns.vue";
+import Confirm from "../views/info/Confirm.vue";
 
 Vue.use(VueRouter);
 
@@ -23,6 +24,13 @@ const routes = [
         path: "/newsletter",
         name: "Newsletter",
         component: Newsletter,
+        children: [
+          {
+            path: "/confirm",
+            name: "Confirm",
+            component: Confirm,
+          },
+        ],
       },
       {
         path: "/contact",

@@ -1,5 +1,5 @@
 <template>
-  <div class="header">
+  <div class="header" :class="{ headerTran: headerTran }">
     <div class="header__menu" @mouseenter="menuEnter" @mouseleave="menuLeave">
       <svg width="32" height="32">
         <path
@@ -62,6 +62,7 @@ export default {
   data() {
     return {
       menuHover: false,
+      headerTran: false,
     };
   },
   methods: {
@@ -72,6 +73,17 @@ export default {
     menuLeave() {
       this.menuHover = false;
       eventBus.$emit("munuHoverUpdate", this.menuHover);
+    },
+  },
+  watch: {
+    $route: function() {
+      let routeName = this.$route.name;
+      console.log(routeName);
+      if (routeName == "Home") {
+        this.headerTran = true;
+      } else {
+        this.headerTran = false;
+      }
     },
   },
 };
@@ -89,8 +101,12 @@ export default {
   align-items: center;
   padding-top: 2.5rem;
   padding-bottom: 1.5rem;
-  transition: background-color 0.3s;
   overflow: hidden;
+  background-color: white;
+
+  &.headerTran {
+    background-color: transparent;
+  }
 
   span {
     font-weight: 700;

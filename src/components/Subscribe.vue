@@ -184,12 +184,7 @@ export default {
         this.prompt = "You must accept the privacy policy.";
         this.modalShow = true;
       } else {
-        this.$store.commit("updateSubscribeDetail", [
-          this.email,
-          this.woman,
-          this.man,
-          this.kids,
-        ]);
+        console.log(`${this.email} subscribe`);
         this.$router.push("/confirm/subscribe");
       }
     },
@@ -322,5 +317,4 @@ button[class*="__submit-btn"] {
   letter-spacing: 0.2px;
   font-weight: 400;
 }
-
 </style>

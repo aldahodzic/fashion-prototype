@@ -47,8 +47,6 @@ export default {
   },
   methods: {
     confirmSubscribe() {
-      let detail = this.$store.getters.getSubscribeDetail;
-      console.log(`Email ${detail.email} subscribed `);
       this.$router.push("/newsletter");
     },
     goHome,

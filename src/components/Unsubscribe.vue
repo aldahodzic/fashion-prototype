@@ -80,7 +80,7 @@ export default {
         });
         this.emailWasFocus = true;
       } else {
-        this.$store.commit("updateUnsubscribeEmail", this.email);
+        console.log(`${this.email} unsubscribe`);
         this.$router.push("/confirm/unsubscribe");
       }
     },

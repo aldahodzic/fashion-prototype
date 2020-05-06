@@ -20,7 +20,12 @@
           </div>
         </div>
         <div class="contact__send__box" v-show="emailUnfold">
-          <button class="contact__send__btn btn-second">Send</button>
+          <router-link
+            to="/contact/form"
+            tag="button"
+            class="contact__send__btn btn-second"
+            >Send</router-link
+          >
         </div>
       </li>
 

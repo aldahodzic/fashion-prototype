@@ -6,6 +6,7 @@ import Newsletter from "../views/info/Newsletter.vue";
 import Contact from "../views/info/Contact.vue";
 import Returns from "../views/info/Returns.vue";
 import Confirm from "../views/info/Confirm.vue";
+import Form from "../views/info/Form.vue";
 
 Vue.use(VueRouter);
 
@@ -35,6 +36,7 @@ const routes = [
         name: "Contact",
         component: Contact,
       },
+      { path: "/contact/form", name: "Form", component: Form },
       { path: "/returns", name: "Returns", component: Returns },
     ],
   },

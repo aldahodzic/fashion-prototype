@@ -244,7 +244,7 @@ export default {
         margin-top: 100px;
       }
       &-link {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
         cursor: pointer;
       }
     }

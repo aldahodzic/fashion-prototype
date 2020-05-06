@@ -54,6 +54,7 @@
           </ul>
         </div>
       </li>
+
       <li class="contact__list">
         <div class="contact__name__box" @click="storeUnfold = !storeUnfold">
           <i class="contact__name__icon fas fa-map-marked-alt"></i>
@@ -67,30 +68,38 @@
             ></span>
           </div>
         </div>
-
-        <div class="contact__store__box" v-show="storeUnfold">
-          <div class="contact__store__container swiper-container">
-            <ul class="contact__store__wrapper swiper-wrapper">
-              <li
-                class="contact__store__list swiper-slide"
-                v-for="store in storeList"
-                :key="store.id"
-                @click="switchMap(store.src)"
-              >
-                <p class="contact__store__list__name">{{ store.name }}</p>
-                <p class="contact__store__list__address">{{ store.address }}</p>
-                <div class="contact__store__list__phone">
-                  <i
-                    class="contact__store__list__phone__icon fas fa-phone-alt"
-                  ></i>
-                  <p class="contact__store__list__number">{{ store.phone }}</p>
-                </div>
-              </li>
-            </ul>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
+        <div class="contact__store" v-show="storeUnfold">
+          <div class="contact__store__location">
+            <div class="contact__store-prev">
+              <i class="contact__store-prev-icon fas fa-chevron-up"></i>
+            </div>
+            <div class="contact__store__container swiper-container">
+              <ul class="contact__store__wrapper swiper-wrapper">
+                <li
+                  class="contact__store__list swiper-slide"
+                  v-for="store in storeList"
+                  :key="store.id"
+                  @click="switchMap(store.src)"
+                >
+                  <p class="contact__store__list__name">{{ store.name }}</p>
+                  <p class="contact__store__list__address">
+                    {{ store.address }}
+                  </p>
+                  <div class="contact__store__list__phone">
+                    <i
+                      class="contact__store__list__phone__icon fas fa-phone-alt"
+                    ></i>
+                    <p class="contact__store__list__number">
+                      {{ store.phone }}
+                    </p>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="contact__store-next">
+              <i class=" contact__store-next-icon fas fa-chevron-down"></i>
+            </div>
           </div>
-
           <div class="contact__store__map googleMap">
             <iframe
               id="iframe_map"
@@ -174,16 +183,20 @@ export default {
     switchMap(map) {
       this.currentMap = map;
     },
+    hideMap() {
+      this.storeUnfold = false;
+    },
   },
   mounted() {
     const swiper = new Swiper(".swiper-container", {
       direction: "vertical",
       slidesPerView: 4,
       navigation: {
-        nextEl: ".swiper-button-next",
-        prevEl: ".swiper-button-prev",
+        nextEl: ".contact__store-next",
+        prevEl: ".contact__store-prev",
       },
     });
+    this.hideMap();
     return swiper;
   },
 };
@@ -194,9 +207,12 @@ export default {
   &__container {
     [class$="__icon"] {
       font-size: 25px;
+      &:first-child {
+        justify-self: center;
+      }
     }
     [class$="__fold__wrapper"] {
-      justify-self: end;
+      justify-self: center;
     }
     [class$="__fold__icon"] {
       font-size: 20px;
@@ -229,7 +245,7 @@ export default {
   &__name {
     &__box {
       display: grid;
-      grid-template-columns: 10% 80% 10%;
+      grid-template-columns: 5% 90% 5%;
       justify-items: start;
       align-items: center;
       height: 70px;
@@ -284,11 +300,44 @@ export default {
   }
 
   &__store {
- 
-    &__box {
-      height: 500px;
+    display: grid;
+    grid-template-columns: 40% 1fr;
+    column-gap: 15px;
+    &__location {
       display: grid;
-      grid-template-columns: 40% 1fr;
+      grid-template-rows: 25px 1fr 25px;
+      justify-items: center;
+    }
+    &-prev,
+    &-next {
+      background-color: #ff5e00;
+      width: 100%;
+      height: 25px;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      &-icon {
+        font-size: 15px;
+        color: white;
+      }
+      &.swiper-button-disabled {
+        background-color: #e5e5e5;
+      }
+      &:focus {
+        outline: 0;
+      }
+    }
+
+    &__container {
+      height: 500px;
+    }
+    &__nav {
+      position: relative;
+      transform: rotate(-90deg);
+      background-color: red;
+      width: 100%;
     }
     &__list {
       border-bottom: 1px solid #ccc;

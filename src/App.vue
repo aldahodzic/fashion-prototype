@@ -15,7 +15,6 @@ export default {
     TopNav,
     SideBar,
   },
-
 };
 </script>
 
@@ -197,6 +196,24 @@ input[type="checkbox"][class$="__input"]:checked
       border: 1px solid white;
       outline-color: white;
     }
+  }
+  &-second {
+    display: block;
+    outline: none;
+    cursor: pointer;
+    text-align: center;
+    border: none;
+    font-size: 16px;
+    letter-spacing: 0.2px;
+    font-stretch: condensed;
+    font-weight: 700;
+    background-color: white;
+    border: 1px solid black;
+    position: relative;
+    text-transform: uppercase;
+    line-height: 50px;
+    min-height: 50px;
+    min-width: 125px;
   }
 }
 

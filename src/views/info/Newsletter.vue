@@ -19,6 +19,6 @@ export default {
 
 <style lang="scss" scoped>
 ::v-deep .subscribe__header {
-  background-color: green;
+  // background-color: green;
 }
 </style>

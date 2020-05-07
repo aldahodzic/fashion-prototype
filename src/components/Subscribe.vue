@@ -7,15 +7,15 @@
     </p>
     <form class="subscribe__form">
       <fieldset>
-        <div class="subscribe__form__email">
+        <div class="subscribe__form__email__typing__container">
           <label
-            class="subscribe__form__email__label"
+            class="subscribe__form__email__typing__label"
             for="subEmail"
             :class="{ moveTop: emailFocus || $v.email.required }"
             >E-mail address</label
           >
           <input
-            class="subscribe__form__email__input"
+            class="subscribe__form__email__typing__input"
             type="email"
             id="subEmail"
             name="email"
@@ -30,7 +30,7 @@
             }"
           />
           <p
-            class="subscribe__form__email__input-warning"
+            class="subscribe__form__email__typing__input-warning"
             :class="{
               warningVisible:
                 emailWasFocus && (!$v.email.email || !$v.email.required),
@@ -256,57 +256,57 @@ div[class$="__email"] {
   padding-bottom: 5px;
   width: 100%;
   max-width: 350px;
+}
 
-  label[class*="__label"] {
-    position: absolute;
-    opacity: 0.6;
-    font-size: 1.6rem;
-    pointer-events: none;
-    transition: all 0.2s;
+label[class*="__typing__label"] {
+  position: absolute;
+  opacity: 0.6;
+  font-size: 1.6rem;
+  pointer-events: none;
+  transition: all 0.2s;
 
-    &.moveTop {
-      transform: translateY(-25px) scale(0.8);
-      margin-top: 0;
-      overflow: visible;
-      margin-left: -10px;
-      opacity: 0.4;
-    }
-  }
-
-  input[class*="__input"] {
-    background: none;
-    border: none;
-    border-radius: 0;
-    border-bottom: 2px solid #cccccc;
-    font-size: 1.6rem;
-    letter-spacing: 0.2px;
-    line-height: 20px;
-    padding: 0 0 8px;
-    width: 100%;
-
-    &:focus {
-      outline: none;
-    }
-    &.inputFocus {
-      border-color: black;
-    }
-    &.inputError {
-      border-color: red;
-    }
-  }
-
-  p[class*="-warning"] {
-    color: red;
-    margin-top: 10px;
-    font-size: 1.2rem;
-    visibility: hidden;
-    &.warningVisible {
-      visibility: visible;
-    }
+  &.moveTop {
+    transform: translateY(-25px) scale(0.8);
+    margin-top: 0;
+    overflow: visible;
+    margin-left: -10px;
+    opacity: 0.4;
   }
 }
 
-label[class$="__checkbox__label"] {
+input[class*="__typing__input"] {
+  background: none;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid #cccccc;
+  font-size: 1.6rem;
+  letter-spacing: 0.2px;
+  line-height: 20px;
+  padding: 0 0 8px;
+  width: 100%;
+
+  &:focus {
+    outline: none;
+  }
+  &.inputFocus {
+    border-color: black;
+  }
+  &.inputError {
+    border-color: red;
+  }
+}
+
+p[class*="__typing__input-warning"] {
+  color: red;
+  margin-top: 10px;
+  font-size: 1.2rem;
+  visibility: hidden;
+  &.warningVisible {
+    visibility: visible;
+  }
+}
+
+label[class*="__checkbox__label"] {
   margin-bottom: 20px;
 }
 

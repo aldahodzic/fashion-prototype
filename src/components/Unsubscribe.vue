@@ -8,15 +8,15 @@
     </p>
     <form class="unsubscribe__form">
       <fieldset>
-        <div class="unsubscribe__form__email">
+        <div class="unsubscribe__form__email__typing__container">
           <label
-            class="unsubscribe__form__email__label"
+            class="unsubscribe__form__email__typing__label"
             for="unSubemail"
             :class="{ moveTop: emailFocus || $v.email.required }"
             >E-mail address</label
           >
           <input
-            class="unsubscribe__form__email__input"
+            class="unsubscribe__form__email__typing__input"
             type="email"
             id="unSubemail"
             name="email"
@@ -31,7 +31,7 @@
             }"
           />
           <p
-            class="unsubscribe__form__email__input-warning"
+            class="unsubscribe__form__email__typing__input-warning"
             :class="{
               warningVisible:
                 emailWasFocus && (!$v.email.email || !$v.email.required),

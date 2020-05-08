@@ -7,38 +7,13 @@
     </p>
     <form class="subscribe__form">
       <fieldset>
-        <div class="subscribe__form__email__typing__container">
-          <label
-            class="subscribe__form__email__typing__label"
-            for="subEmail"
-            :class="{ moveTop: emailFocus || $v.email.required }"
-            >E-mail address</label
-          >
-          <input
-            class="subscribe__form__email__typing__input"
-            type="email"
-            id="subEmail"
-            name="email"
-            v-model="email"
-            @input="$v.email.$touch()"
-            @focus="(emailFocus = true), (emailWasFocus = true)"
-            @blur="emailFocus = false"
-            :class="{
-              inputFocus: emailFocus,
-              inputError:
-                emailWasFocus && (!$v.email.required || !$v.email.email),
-            }"
-          />
-          <p
-            class="subscribe__form__email__typing__input-warning"
-            :class="{
-              warningVisible:
-                emailWasFocus && (!$v.email.email || !$v.email.required),
-            }"
-          >
-            {{ inputWarning }}
-          </p>
-        </div>
+        <EmailInput
+          :idName="email.idName"
+          :submitNull="email.submitNull"
+          autocomplete="on"
+          @typingEmail="email.input = $event"
+        ></EmailInput>
+
         <div class="subscribe__form__interest">
           <legend class="subscribe__form__interest__legend">
             Sections of your interest
@@ -146,14 +121,16 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import EmailInput from "@/components/EmailInput.vue";
 
 export default {
   data() {
     return {
-      emailFocus: false,
-      emailWasFocus: false,
-      email: "",
+      email: {
+        input: "",
+        idName: "subEmail",
+        submitNull: false,
+      },
       woman: false,
       man: false,
       kids: false,
@@ -162,21 +139,18 @@ export default {
       prompt: "",
     };
   },
-  validations: {
-    email: {
-      required,
-      email,
-    },
+  components: {
+    EmailInput,
   },
   methods: {
     subscribe() {
-      if (!this.$v.email.required) {
-        document.getElementById("subEmail").scrollIntoView({
+      if (!this.email.input) {
+        document.getElementById(this.email.idName).scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "nearest",
         });
-        this.emailWasFocus = true;
+        this.email.submitNull = true;
       } else if (!this.woman && !this.man && !this.kids) {
         this.prompt = "You must choose at least one of the options.";
         this.modalShow = true;
@@ -184,20 +158,9 @@ export default {
         this.prompt = "You must accept the privacy policy.";
         this.modalShow = true;
       } else {
-        console.log(`${this.email} subscribe`);
+        console.log(`${this.email.input} subscribe`);
         this.$router.push("/confirm/subscribe");
       }
-    },
-  },
-  computed: {
-    inputWarning() {
-      if (this.emailWasFocus && !this.$v.email.required) {
-        return "Required field.";
-      }
-      if (!this.$v.email.email) {
-        return "Enter a valid e-mail address.";
-      }
-      return "no warning";
     },
   },
 };

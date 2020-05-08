@@ -6,40 +6,15 @@
     <p lass="unsubscribe__para">
       Enter the email address you used to subscribe and click on UNSUBSCRIBE.
     </p>
-    <form class="unsubscribe__form">
+    <form class="unsubscribe__form" autocomplete="on">
       <fieldset>
-        <div class="unsubscribe__form__email__typing__container">
-          <label
-            class="unsubscribe__form__email__typing__label"
-            for="unSubemail"
-            :class="{ moveTop: emailFocus || $v.email.required }"
-            >E-mail address</label
-          >
-          <input
-            class="unsubscribe__form__email__typing__input"
-            type="email"
-            id="unSubemail"
-            name="email"
-            v-model="email"
-            @input="$v.email.$touch()"
-            @focus="(emailFocus = true), (emailWasFocus = true)"
-            @blur="emailFocus = false"
-            :class="{
-              inputFocus: emailFocus,
-              inputError:
-                emailWasFocus && (!$v.email.required || !$v.email.email),
-            }"
-          />
-          <p
-            class="unsubscribe__form__email__typing__input-warning"
-            :class="{
-              warningVisible:
-                emailWasFocus && (!$v.email.email || !$v.email.required),
-            }"
-          >
-            {{ inputWarning }}
-          </p>
-        </div>
+        <EmailInput
+          :idName="email.idName"
+          :submitNull="email.submitNull"
+          autocomplete="on"
+          @typingEmail="email.input = $event"
+        ></EmailInput>
+
         <div class="unsubscribe__form__submit">
           <button
             class="unsubscribe__form__submit-btn btn-main"
@@ -54,46 +29,34 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import EmailInput from "@/components/EmailInput.vue";
 
 export default {
   data() {
     return {
-      emailFocus: false,
-      emailWasFocus: false,
-      email: "",
+      email: {
+        input: "",
+        idName: "unsubEmail",
+        submitNull: false,
+      },
     };
   },
-  validations: {
-    email: {
-      required,
-      email,
-    },
+  components: {
+    EmailInput,
   },
   methods: {
     unsubscribe() {
-      if (!this.$v.email.required || !this.$v.email.email) {
-        document.getElementById("unSubemail").scrollIntoView({
+      if (!this.email.input) {
+        document.getElementById(this.email.idName).scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "nearest",
         });
-        this.emailWasFocus = true;
+        this.email.submitNull = true;
       } else {
-        console.log(`${this.email} unsubscribe`);
+        console.log(`${this.email.input} unsubscribe`);
         this.$router.push("/confirm/unsubscribe");
       }
-    },
-  },
-  computed: {
-    inputWarning() {
-      if (this.emailWasFocus && !this.$v.email.required) {
-        return "Required field.";
-      }
-      if (!this.$v.email.email) {
-        return "Enter a valid e-mail address.";
-      }
-      return "no Waring";
     },
   },
 };

@@ -66,7 +66,6 @@
           {{ inputRequired($v.surname.input) }}
         </p>
       </div>
-      <p>{{ $v.prefix }}</p>
 
       <div class="contactForm__form__phone__typing__container">
         <div class="contactForm__form__prefix__container">
@@ -88,7 +87,9 @@
             @blur="prefix.inputFocus = false"
             :class="{
               inputFocus: prefix.inputFocus,
-              inputError: prefix.inputWasFocus && !$v.prefix.input.required,
+              inputError:
+                prefix.inputWasFocus &&
+                (!$v.prefix.input.required || !$v.prefix.input.prefixValidate),
             }"
           />
         </div>
@@ -117,12 +118,21 @@
         <p
           class="contactForm__form__phone__typing__input-warning"
           :class="{
-            warningVisible: phone.inputWasFocus && !$v.phone.input.required,
+            warningVisible:
+              (phone.inputWasFocus || prefix.inputWasFocus) &&
+              (!$v.phone.input.required ||
+                !$v.prefix.input.required ||
+                !$v.prefix.input.prefixValidate),
           }"
         >
-          {{ phoneWarning($v.prefix.input, $v.phone.input) }}
+          {{ phoneWarning() }}
         </p>
       </div>
+
+      <EmailInput
+        idName="email"
+        @typingEmail="email.input = $event"
+      ></EmailInput>
 
       <!-- <div class="contactForm__form__email__typing__container">
         <label
@@ -288,16 +298,17 @@
 
 <script>
 import { required } from "vuelidate/lib/validators";
-import { helpers } from "vuelidate/lib/validators";
+import EmailInput from "@/components/EmailInput.vue";
 
-// function prefixValidate(prefixInput) {
-//   if (prefixInput[0] === "+") {
-//     return true;
-//   }
-//   return false;
-// }
-
-const prefixValidate = helpers.regex("prefixInput", /^\+[0-9]*$/);
+const prefixValidate = prefixInput => {
+  if (prefixInput.length < 2) {
+    return false;
+  }
+  if (prefixInput[0] === "+") {
+    return true;
+  }
+  return false;
+};
 
 export default {
   data() {
@@ -322,7 +333,14 @@ export default {
         inputFocus: false,
         inputWasFocus: false,
       },
+      email: {
+        input: "",
+        submitNull: false,
+      },
     };
+  },
+  components: {
+    EmailInput,
   },
   validations: {
     name: {
@@ -345,11 +363,12 @@ export default {
       }
       return "no Waring";
     },
-    phoneWarning(prefixInput, phoneInput) {
-      if (!phoneInput.required) {
+
+    phoneWarning() {
+      if (!this.$v.phone.input.required || !this.$v.prefix.input.required) {
         return "Required field.";
       }
-      if (!prefixInput.required) {
+      if (!this.$v.prefix.input.prefixValidate) {
         return "Please, enter a valid prefix";
       }
       return "no Waring";
@@ -408,6 +427,22 @@ export default {
         &__input {
           &-warning {
             grid-column: 1/3;
+          }
+        }
+      }
+    }
+
+    &__prefix {
+      &__typing {
+        &__input {
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            /* display: none; <- Crashes Chrome on hover */
+            -webkit-appearance: none;
+            margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+          }
+          &[type="number"] {
+            -moz-appearance: textfield; /* Firefox */
           }
         }
       }

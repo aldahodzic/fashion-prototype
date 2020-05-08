@@ -111,6 +111,15 @@ export default {
   }
 
   &__form {
+    width: 47.5%;
+    &__email {
+      &__typing {
+        &__container {
+          width: 100%;
+          max-width: 350px;
+        }
+      }
+    }
     &__submit {
       margin-top: 10px;
     }

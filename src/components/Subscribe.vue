@@ -214,6 +214,18 @@ export default {
   }
 
   &__form {
+    width: 47.5%;
+    &__email {
+      &__typing {
+        &__container {
+          padding-bottom: 5px;
+          padding-top: 10px;
+          width: 100%;
+          max-width: 350px;
+        }
+      }
+    }
+
     &__interest {
       padding-bottom: 5px;
       padding-top: 10px;
@@ -248,7 +260,6 @@ p[class$="__para"] {
 }
 form[class$="__form"] {
   margin-top: 40px;
-  width: 47.5%;
   font-size: 1.4rem;
 }
 div[class$="__email"] {
@@ -264,7 +275,8 @@ label[class*="__typing__label"] {
   font-size: 1.6rem;
   pointer-events: none;
   transition: all 0.2s;
-
+}
+label[class*="__label"] {
   &.moveTop {
     transform: translateY(-25px) scale(0.8);
     margin-top: 0;
@@ -282,7 +294,7 @@ input[class*="__typing__input"] {
   font-size: 1.6rem;
   letter-spacing: 0.2px;
   line-height: 20px;
-  padding: 0 0 8px;
+  padding: 0 0 10px;
   width: 100%;
 
   &:focus {

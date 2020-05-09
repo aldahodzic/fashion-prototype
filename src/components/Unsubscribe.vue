@@ -9,7 +9,7 @@
     <form class="unsubscribe__form" autocomplete="on">
       <fieldset>
         <EmailInput
-          :idName="email.idName"
+          idName="unsubEmail"
           :submitNull="email.submitNull"
           autocomplete="on"
           @typingEmail="email.input = $event"
@@ -36,7 +36,6 @@ export default {
     return {
       email: {
         input: "",
-        idName: "unsubEmail",
         submitNull: false,
       },
     };
@@ -47,7 +46,7 @@ export default {
   methods: {
     unsubscribe() {
       if (!this.email.input) {
-        document.getElementById(this.email.idName).scrollIntoView({
+        document.getElementById("unsubEmail").scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "nearest",

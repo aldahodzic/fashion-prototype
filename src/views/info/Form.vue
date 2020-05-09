@@ -23,13 +23,15 @@
           @blur="name.inputFocus = false"
           :class="{
             inputFocus: name.inputFocus,
-            inputError: name.inputWasFocus && !$v.name.input.required,
+            inputError:
+              name.inputWasFocus && !name.inputFocus && !$v.name.input.required,
           }"
         />
         <p
           class="contactForm__form__name__typing__input-warning"
           :class="{
-            warningVisible: name.inputWasFocus && !$v.name.input.required,
+            warningVisible:
+              name.inputWasFocus && !name.inputFocus && !$v.name.input.required,
           }"
         >
           {{ inputRequired($v.name.input) }}
@@ -54,13 +56,19 @@
           @blur="surname.inputFocus = false"
           :class="{
             inputFocus: surname.inputFocus,
-            inputError: surname.inputWasFocus && !$v.surname.input.required,
+            inputError:
+              surname.inputWasFocus &&
+              !surname.inputFocus &&
+              !$v.surname.input.required,
           }"
         />
         <p
           class="contactForm__form__surname__typing__input-warning"
           :class="{
-            warningVisible: surname.inputWasFocus && !$v.surname.input.required,
+            warningVisible:
+              surname.inputWasFocus &&
+              !surname.inputFocus &&
+              !$v.surname.input.required,
           }"
         >
           {{ inputRequired($v.surname.input) }}
@@ -89,6 +97,7 @@
               inputFocus: prefix.inputFocus,
               inputError:
                 prefix.inputWasFocus &&
+                !prefix.inputFocus &&
                 (!$v.prefix.input.required || !$v.prefix.input.prefixValidate),
             }"
           />
@@ -111,7 +120,10 @@
             @blur="phone.inputFocus = false"
             :class="{
               inputFocus: phone.inputFocus,
-              inputError: phone.inputWasFocus && !$v.phone.input.required,
+              inputError:
+                phone.inputWasFocus &&
+                !phone.inputFocus &&
+                !$v.phone.input.required,
             }"
           />
         </div>
@@ -119,13 +131,22 @@
           class="contactForm__form__phone__typing__input-warning"
           :class="{
             warningVisible:
-              (phone.inputWasFocus || prefix.inputWasFocus) &&
-              (!$v.phone.input.required ||
-                !$v.prefix.input.required ||
-                !$v.prefix.input.prefixValidate),
+              (prefix.inputWasFocus && !prefix.inputFocus) ||
+              (phone.inputWasFocus &&
+                !phone.inputFocus &&
+                (!$v.phone.input.required ||
+                  !$v.prefix.input.required ||
+                  !$v.prefix.input.prefixValidate)),
           }"
         >
           {{ phoneWarning() }}
+        </p>
+        <p
+          class="contactForm__form__prefix__typing__input-tip"
+          v-show="prefix.inputFocus || phone.inputFocus"
+        >
+          Enter a contact telephone number including the area code. Example: +66
+          022134567
         </p>
       </div>
 
@@ -134,38 +155,7 @@
         @typingEmail="email.input = $event"
       ></EmailInput>
 
-      <!-- <div class="contactForm__form__email__typing__container">
-        <label
-          for="email"
-          class="contactForm__form__email__typing__label"
-          :class="{ moveTop: email.inputFocus || $v.email.input.required }"
-          >E-mail address</label
-        >
-        <input
-          type="email"
-          class="contactForm__form__email__typing__input"
-          id="email"
-          name="email"
-          v-model="email.input"
-          @input="$v.email.$touch()"
-          @focus="(email.inputFocus = true), (email.inputWasFocus = true)"
-          @blur="email.inputFocus = false"
-          :class="{
-            inputFocus: email.inputFocus,
-            inputError: email.inputWasFocus && !$v.email.input.required,
-          }"
-        />
-        <p
-          class="contactForm__form__email__typing__input-warning"
-          :class="{
-            warningVisible: email.inputWasFocus && !$v.email.input.required,
-          }"
-        >
-          {{ inputRequired($v.email.input) }}
-        </p>
-      </div> -->
-
-      <!-- <div class="contactForm__form__category__select__container">
+      <div class="contactForm__form__category__select__container">
         <label
           for="category"
           class="contactForm__form__category__select__label moveTop"
@@ -174,8 +164,18 @@
         <select
           name="category"
           id="category"
-          class="contactForm__form__category__select__box"
+          class="contactForm__form__category__select__input"
           v-model="category.input"
+          @input="$v.category.$touch()"
+          @focus="(category.inputFocus = true), (category.inputWasFocus = true)"
+          @blur="category.inputFocus = false"
+          :class="{
+            inputFocus: category.inputFocus,
+            inputError:
+              category.inputWasFocus &&
+              !category.inputFocus &&
+              !$v.category.input.required,
+          }"
         >
           <option value="" disabled selected>Select</option>
           <option value="status">Order status</option>
@@ -189,15 +189,17 @@
         ></i>
 
         <p
-          class="contactForm__form__category__typing__input-warning"
+          class="contactForm__form__category__select__input-warning"
           :class="{
             warningVisible:
-              category.inputWasFocus && !$v.category.input.required,
+              category.inputWasFocus &&
+              !category.inputFocus &&
+              !$v.category.input.required,
           }"
         >
           {{ inputRequired($v.category.input) }}
         </p>
-      </div> -->
+      </div>
 
       <!-- <div class="contactForm__form__subject__typing__container">
         <label
@@ -299,6 +301,7 @@
 <script>
 import { required } from "vuelidate/lib/validators";
 import EmailInput from "@/components/EmailInput.vue";
+import RequiredInput from "@/components/RequiredInput.vue";
 
 const prefixValidate = prefixInput => {
   if (prefixInput.length < 2) {
@@ -337,10 +340,20 @@ export default {
         input: "",
         submitNull: false,
       },
+      category: {
+        input: "",
+        inputFocus: false,
+        inputWasFocus: false,
+      },
+      test: {
+        input: "",
+        submitNull: false,
+      },
     };
   },
   components: {
     EmailInput,
+    RequiredInput,
   },
   validations: {
     name: {
@@ -353,6 +366,9 @@ export default {
       input: { required, prefixValidate },
     },
     phone: {
+      input: { required },
+    },
+    category: {
       input: { required },
     },
   },
@@ -444,6 +460,12 @@ export default {
           &[type="number"] {
             -moz-appearance: textfield; /* Firefox */
           }
+
+          &-tip {
+            grid-column: 1/3;
+            color: #999;
+            font-size: 12px;
+          }
         }
       }
     }
@@ -454,7 +476,7 @@ export default {
           position: relative;
         }
 
-        &__box {
+        &__input {
           position: absolute;
           left: 0;
           top: 0;
@@ -481,6 +503,8 @@ export default {
           position: absolute;
           right: 10px;
           top: 5px;
+
+          pointer-events: none;
         }
       }
     }

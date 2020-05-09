@@ -8,7 +8,7 @@
     <form class="subscribe__form">
       <fieldset>
         <EmailInput
-          :idName="email.idName"
+          idName="subEmail"
           :submitNull="email.submitNull"
           autocomplete="on"
           @typingEmail="email.input = $event"
@@ -128,7 +128,6 @@ export default {
     return {
       email: {
         input: "",
-        idName: "subEmail",
         submitNull: false,
       },
       woman: false,
@@ -145,7 +144,7 @@ export default {
   methods: {
     subscribe() {
       if (!this.email.input) {
-        document.getElementById(this.email.idName).scrollIntoView({
+        document.getElementById("subEmail").scrollIntoView({
           behavior: "smooth",
           block: "center",
           inline: "nearest",
@@ -249,7 +248,8 @@ label[class*="__label"] {
   }
 }
 
-input[class*="__typing__input"] {
+input[class*="__typing__input"],
+select[class*="__select__input"] {
   background: none;
   border: none;
   border-radius: 0;
@@ -271,7 +271,7 @@ input[class*="__typing__input"] {
   }
 }
 
-p[class*="__typing__input-warning"] {
+p[class*="__input-warning"] {
   color: red;
   margin-top: 10px;
   font-size: 1.2rem;

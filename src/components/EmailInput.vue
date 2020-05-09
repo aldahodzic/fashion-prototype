@@ -17,7 +17,10 @@
       @blur="(emailFocus = false), emitEmail()"
       :class="{
         inputFocus: emailFocus,
-        inputError: emailWasFocus && (!$v.email.required || !$v.email.email),
+        inputError:
+          emailWasFocus &&
+          !emailFocus &&
+          (!$v.email.required || !$v.email.email),
       }"
       :autocomplete="autocomplete"
     />
@@ -25,7 +28,9 @@
       class="email__typing__input-warning"
       :class="{
         warningVisible:
-          emailWasFocus && (!$v.email.email || !$v.email.required),
+          emailWasFocus &&
+          !emailFocus &&
+          (!$v.email.email || !$v.email.required),
       }"
     >
       {{ inputWarning }}
@@ -72,7 +77,7 @@ export default {
     },
   },
   watch: {
-    submitNull: function() {
+    submitNull() {
       this.emailWasFocus = true;
     },
   },

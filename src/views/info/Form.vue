@@ -6,17 +6,17 @@
     </h3>
     <form class="contactForm__form" autocomplete="off">
       <RequiredInput
-        :placeHolder="name.placeHolder"
-        :idName="name.idName"
-        :submitNull="name.submitNull"
-        @emitInput="name.input = $event"
+        :placeHolder="form.name.placeHolder"
+        :idName="form.name.idName"
+        :submitNull="form.name.submitNull"
+        @emitInput="form.name.input = $event"
       ></RequiredInput>
 
       <RequiredInput
-        :placeHolder="surname.placeHolder"
-        :idName="surname.idName"
-        :submitNull="surname.submitNull"
-        @emitInput="surname.input = $event"
+        :placeHolder="form.surname.placeHolder"
+        :idName="form.surname.idName"
+        :submitNull="form.surname.submitNull"
+        @emitInput="form.surname.input = $event"
       ></RequiredInput>
 
       <div class="contactForm__form__phone__typing__container">
@@ -24,7 +24,9 @@
           <label
             for="prefix"
             class="contactForm__form__prefix__typing__label"
-            :class="{ moveTop: prefix.inputFocus || $v.prefix.input.required }"
+            :class="{
+              moveTop: form.prefix.inputFocus || $v.form.prefix.input.required,
+            }"
             >Prefix</label
           >
           <input
@@ -33,24 +35,31 @@
             class="contactForm__form__prefix__typing__input"
             id="prefix"
             name="prefix"
-            v-model="prefix.input"
-            @input="$v.prefix.$touch()"
-            @focus="(prefix.inputFocus = true), (prefix.inputWasFocus = true)"
-            @blur="prefix.inputFocus = false"
+            v-model="form.prefix.input"
+            @input="$v.form.prefix.$touch()"
+            @focus="
+              (form.prefix.inputFocus = true),
+                (form.prefix.inputWasFocus = true)
+            "
+            @blur="form.prefix.inputFocus = false"
             :class="{
-              inputFocus: prefix.inputFocus,
+              inputFocus: form.prefix.inputFocus,
               inputError:
-                prefix.inputWasFocus &&
-                !prefix.inputFocus &&
-                (!$v.prefix.input.required || !$v.prefix.input.prefixValidate),
+                form.prefix.inputWasFocus &&
+                !form.prefix.inputFocus &&
+                (!$v.form.prefix.input.required ||
+                  !$v.form.prefix.input.prefixValidate),
             }"
           />
         </div>
+
         <div class="contactForm__form__phone__container">
           <label
             for="phone"
             class="contactForm__form__phone__typing__label"
-            :class="{ moveTop: phone.inputFocus || $v.phone.input.required }"
+            :class="{
+              moveTop: form.phone.inputFocus || $v.form.phone.input.required,
+            }"
             >Telephone</label
           >
           <input
@@ -58,16 +67,18 @@
             class="contactForm__form__phone__typing__input"
             id="phone"
             name="phone"
-            v-model="phone.input"
-            @input="$v.phone.$touch()"
-            @focus="(phone.inputFocus = true), (phone.inputWasFocus = true)"
-            @blur="phone.inputFocus = false"
+            v-model="form.phone.input"
+            @input="$v.form.phone.$touch()"
+            @focus="
+              (form.phone.inputFocus = true), (form.phone.inputWasFocus = true)
+            "
+            @blur="form.phone.inputFocus = false"
             :class="{
-              inputFocus: phone.inputFocus,
+              inputFocus: form.phone.inputFocus,
               inputError:
-                phone.inputWasFocus &&
-                !phone.inputFocus &&
-                !$v.phone.input.required,
+                form.phone.inputWasFocus &&
+                !form.phone.inputFocus &&
+                !$v.form.phone.input.required,
             }"
           />
         </div>
@@ -75,19 +86,21 @@
           class="contactForm__form__phone__typing__input-warning"
           :class="{
             warningVisible:
-              (prefix.inputWasFocus && !prefix.inputFocus) ||
-              (phone.inputWasFocus &&
-                !phone.inputFocus &&
-                (!$v.phone.input.required ||
-                  !$v.prefix.input.required ||
-                  !$v.prefix.input.prefixValidate)),
+              (form.prefix.inputWasFocus &&
+                !form.prefix.inputFocus &&
+                (!$v.form.prefix.input.required ||
+                  !$v.form.prefix.input.prefixValidate)) ||
+              (form.phone.inputWasFocus &&
+                !form.phone.inputFocus &&
+                (!$v.form.phone.input.required ||
+                  !$v.form.phone.input.numeric)),
           }"
         >
           {{ phoneWarning() }}
         </p>
         <p
           class="contactForm__form__prefix__typing__input-tip"
-          v-show="prefix.inputFocus || phone.inputFocus"
+          v-show="form.prefix.inputFocus || form.phone.inputFocus"
         >
           Enter a contact telephone number including the area code. Example: +66
           022134567
@@ -96,8 +109,8 @@
 
       <EmailInput
         idName="email"
-        @typingEmail="email.input = $event"
-        :submitNull="email.submitNull"
+        @emitEmail="form.email.input = $event"
+        :submitNull="form.email.submitNull"
       ></EmailInput>
 
       <div class="contactForm__form__category__select__container">
@@ -110,16 +123,19 @@
           name="category"
           id="category"
           class="contactForm__form__category__select__input"
-          v-model="category.input"
-          @input="$v.category.$touch()"
-          @focus="(category.inputFocus = true), (category.inputWasFocus = true)"
-          @blur="category.inputFocus = false"
+          v-model="form.category.input"
+          @input="$v.form.category.$touch()"
+          @focus="
+            (form.category.inputFocus = true),
+              (form.category.inputWasFocus = true)
+          "
+          @blur="form.category.inputFocus = false"
           :class="{
-            inputFocus: category.inputFocus,
+            inputFocus: form.category.inputFocus,
             inputError:
-              category.inputWasFocus &&
-              !category.inputFocus &&
-              !$v.category.input.required,
+              form.category.inputWasFocus &&
+              !form.category.inputFocus &&
+              !$v.form.category.input.required,
           }"
         >
           <option value="" disabled selected>Select</option>
@@ -137,37 +153,40 @@
           class="contactForm__form__category__select__input-warning"
           :class="{
             warningVisible:
-              category.inputWasFocus &&
-              !category.inputFocus &&
-              !$v.category.input.required,
+              form.category.inputWasFocus &&
+              !form.category.inputFocus &&
+              !$v.form.category.input.required,
           }"
         >
-          {{ inputRequired($v.category.input) }}
+          {{ inputRequired($v.form.category.input) }}
         </p>
       </div>
 
       <RequiredInput
-        :placeHolder="subject.placeHolder"
-        :idName="subject.idName"
-        :submitNull="subject.submitNull"
-        @emitInput="subject.input = $event"
+        :placeHolder="form.subject.placeHolder"
+        :idName="form.subject.idName"
+        :submitNull="form.subject.submitNull"
+        @emitInput="form.subject.input = $event"
       ></RequiredInput>
 
       <RequiredInput
         class="contactForm__form__message__typing__container"
-        :placeHolder="message.placeHolder"
-        :idName="message.idName"
-        :submitNull="message.submitNull"
+        :placeHolder="form.message.placeHolder"
+        :idName="form.message.idName"
+        :submitNull="form.message.submitNull"
         :isTextarea="true"
-        @emitInput="message.input = $event"
+        @emitInput="form.message.input = $event"
       ></RequiredInput>
 
       <RequiredInput
-        v-if="category.input == 'status' || category.input == 'exchangeReturn'"
-        :placeHolder="orderNumber.placeHolder"
-        :idName="orderNumber.idName"
-        :submitNull="orderNumber.submitNull"
-        @emitInput="orderNumber.input = $event"
+        v-if="
+          form.category.input == 'status' ||
+            form.category.input == 'exchangeReturn'
+        "
+        :placeHolder="form.orderNumber.placeHolder"
+        :idName="form.orderNumber.idName"
+        :submitNull="form.orderNumber.submitNull"
+        @emitInput="form.orderNumber.input = $event"
       ></RequiredInput>
     </form>
     <div class="contactForm__form__privacy">
@@ -177,6 +196,7 @@
         name="privacy"
         value="privacy"
         id="privacy"
+        v-model="privacy"
       />
       <label class="contactForm__form__privacy__checkbox__label" for="privacy">
         <span class="contactForm__form__privacy__checkbox"
@@ -194,11 +214,28 @@
         SEND
       </button>
     </div>
+
+    <div class="modal__container" v-show="modalShow" @click="modalShow = false">
+      <div class="modal__box">
+        <i class="fas fa-exclamation modal__icon"></i>
+        <h3 class="modal__warning">WARNING</h3>
+        <p class="modal__prompt">
+          {{ prompt }}
+        </p>
+        <button
+          type="button"
+          class="modal__btn btn-main"
+          @click="modalShow = false"
+        >
+          ACCEPT
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-import { required } from "vuelidate/lib/validators";
+import { required, numeric } from "vuelidate/lib/validators";
 import EmailInput from "@/components/EmailInput.vue";
 import RequiredInput from "@/components/RequiredInput.vue";
 
@@ -215,59 +252,65 @@ const prefixValidate = prefixInput => {
 export default {
   data() {
     return {
-      name: {
-        input: "",
-        submitNull: false,
-        idName: "name",
-        placeHolder: "Name",
+      form: {
+        name: {
+          input: "",
+          submitNull: false,
+          idName: "name",
+          placeHolder: "Name",
+        },
+        surname: {
+          input: "",
+          submitNull: false,
+          idName: "surname",
+          placeHolder: "Surname",
+        },
+        prefix: {
+          input: "",
+          idName: "prefix",
+          inputFocus: false,
+          inputWasFocus: false,
+        },
+        phone: {
+          input: "",
+          idName: "phone",
+          inputFocus: false,
+          inputWasFocus: false,
+        },
+        email: {
+          input: "",
+          idName: "email",
+          submitNull: false,
+        },
+        category: {
+          input: "",
+          idName: "category",
+          inputFocus: false,
+          inputWasFocus: false,
+        },
+        subject: {
+          input: "",
+          submitNull: false,
+          idName: "subject",
+          placeHolder: "Subject",
+        },
+        message: {
+          input: "",
+          submitNull: false,
+          idName: "message",
+          placeHolder: "Message",
+        },
+        orderNumber: {
+          input: "",
+          submitNull: false,
+          idName: "orderNumber",
+          placeHolder: "Order no.",
+        },
       },
-      surname: {
-        input: "",
-        submitNull: false,
-        idName: "surname",
-        placeHolder: "Surname",
-      },
-      prefix: {
-        input: "",
-        idName: "prefix",
-        inputFocus: false,
-        inputWasFocus: false,
-      },
-      phone: {
-        input: "",
-        idName: "phone",
-        inputFocus: false,
-        inputWasFocus: false,
-      },
-      email: {
-        input: "",
-        idName: "email",
-        submitNull: false,
-      },
-      category: {
-        input: "",
-        idName: "category",
-        inputFocus: false,
-        inputWasFocus: false,
-      },
-      subject: {
-        input: "",
-        submitNull: false,
-        idName: "subject",
-        placeHolder: "Subject",
-      },
-      message: {
-        input: "",
-        submitNull: false,
-        idName: "message",
-        placeHolder: "Message",
-      },
-      orderNumber: {
-        input: "",
-        submitNull: false,
-        idName: "orderNumber",
-        placeHolder: "Order no.",
-      },
+
+      privacy: false,
+      modalShow: false,
+      prompt: "You must accept the privacy policy in order to submit form.",
     };
   },
   components: {
@@ -275,20 +318,22 @@ export default {
     RequiredInput,
   },
   validations: {
-    name: {
-      input: { required },
-    },
-    surname: {
-      input: { required },
-    },
-    prefix: {
-      input: { required, prefixValidate },
-    },
-    phone: {
-      input: { required },
-    },
-    category: {
-      input: { required },
+    form: {
+      name: {
+        input: { required },
+      },
+      surname: {
+        input: { required },
+      },
+      prefix: {
+        input: { required, prefixValidate },
+      },
+      phone: {
+        input: { required, numeric },
+      },
+      category: {
+        input: { required },
+      },
     },
   },
   methods: {
@@ -300,23 +345,28 @@ export default {
     },
 
     phoneWarning() {
-      if (!this.$v.phone.input.required || !this.$v.prefix.input.required) {
+      if (
+        !this.$v.form.phone.input.required ||
+        !this.$v.form.prefix.input.required
+      ) {
         return "Required field.";
       }
-      if (!this.$v.prefix.input.prefixValidate) {
+      if (!this.$v.form.phone.input.numeric) {
+        return "Enter a valid phone number.";
+      }
+      if (!this.$v.form.prefix.input.prefixValidate) {
         return "Please, enter a valid prefix";
       }
       return "no Waring";
     },
     sendForm() {
-      for (let [key, value] of Object.entries(this.$data)) {
-        // console.log(`${key}: ${value.idName}`);
+      let data = {};
+
+      for (let [key, value] of Object.entries(this.$data.form)) {
         if (!value.input) {
-          if (key == "orderNumber") {
-            break;
-          }
-          console.log(key);
-          if (key == "prefix" || key == "phone" || key == "category") {
+          if (key == "orderNumber" && !this.$data.form.category.input) {
+            continue;
+          } else if (key == "prefix" || key == "phone" || key == "category") {
             value.inputWasFocus = true;
           } else {
             value.submitNull = true;
@@ -326,6 +376,20 @@ export default {
             block: "center",
             inline: "nearest",
           });
+        } else {
+          data[key] = value.input;
+        }
+      }
+      let size = Object.keys(data).length;
+      if (size >= 8) {
+        if (!this.privacy) {
+          this.modalShow = true;
+        } else {
+          console.log("form submit: ");
+          for (let [key, value] of Object.entries(data)) {
+            console.log(`${key}:${value}`);
+            this.$router.push("/contact/respond");
+          }
         }
       }
     },

@@ -7,6 +7,7 @@ import Contact from "../views/info/Contact.vue";
 import Returns from "../views/info/Returns.vue";
 import Confirm from "../views/info/Confirm.vue";
 import Form from "../views/info/Form.vue";
+import FormRespond from "../views/info/FormRespond.vue";
 
 Vue.use(VueRouter);
 
@@ -37,6 +38,11 @@ const routes = [
         component: Contact,
       },
       { path: "/contact/form", name: "Form", component: Form },
+      {
+        path: "/contact/respond",
+        name: "FormRespond",
+        component: FormRespond,
+      },
       { path: "/returns", name: "Returns", component: Returns },
     ],
   },

@@ -101,6 +101,7 @@
         </div>
       </fieldset>
     </form>
+
     <div class="modal__container" v-show="modalShow" @click="modalShow = false">
       <div class="modal__box">
         <i class="fas fa-exclamation modal__icon"></i>
@@ -117,6 +118,7 @@
         </button>
       </div>
     </div>
+    
   </section>
 </template>
 

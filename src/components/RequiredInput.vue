@@ -4,9 +4,26 @@
       class="required__typing__label"
       :for="idName"
       :class="{ moveTop: inputFocus || $v.input.required }"
-      >{{ placeholder }}</label
+      >{{ placeHolder }}</label
     >
+
+    <textarea
+      v-if="isTextarea"
+      class="required__textarea__input"
+      type="text"
+      :id="idName"
+      :name="idName"
+      v-model="input"
+      @input="$v.input.$touch(), autoHeight()"
+      @focus="(inputFocus = true), (inputWasFocus = true)"
+      @blur="(inputFocus = false), emitInput()"
+      :class="{
+        inputFocus: inputFocus,
+        inputError: inputWasFocus && !inputFocus && !$v.input.required,
+      }"
+    />
     <input
+      v-else
       class="required__typing__input"
       type="text"
       :id="idName"
@@ -14,13 +31,14 @@
       v-model="input"
       @input="$v.input.$touch()"
       @focus="(inputFocus = true), (inputWasFocus = true)"
-      @blur="(inputFocus = false), emitinput()"
+      @blur="(inputFocus = false), emitInput()"
       :class="{
         inputFocus: inputFocus,
         inputError: inputWasFocus && !inputFocus && !$v.input.required,
       }"
       :autocomplete="autocomplete"
     />
+
     <p
       class="required__typing__input-warning"
       :class="{
@@ -36,7 +54,7 @@
 import { required } from "vuelidate/lib/validators";
 
 export default {
-  props: ["idName", "autocomplete", "submitNull"],
+  props: ["idName", "autocomplete", "submitNull", "placeHolder", "isTextarea"],
   data() {
     return {
       input: "",
@@ -50,12 +68,17 @@ export default {
     },
   },
   methods: {
-    emitinput() {
+    emitInput() {
       if (this.$v.input.required) {
-        this.$emit("typinginput", this.input);
+        this.$emit("emitInput", this.input);
       } else {
-        this.$emit("typinginput", false);
+        this.$emit("emitInput", false);
       }
+    },
+    autoHeight() {
+      let textArea = document.getElementById(this.idName);
+      textArea.style.height = "auto";
+      textArea.style.height = textArea.scrollHeight + "px";
     },
   },
   computed: {

@@ -59,9 +59,9 @@ export default {
   methods: {
     emitEmail() {
       if (this.$v.email.required && this.$v.email.email) {
-        this.$emit("typingEmail", this.email);
+        this.$emit("emitEmail", this.email);
       } else {
-        this.$emit("typingEmail", false);
+        this.$emit("emitEmail", false);
       }
     },
   },

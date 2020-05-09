@@ -12,7 +12,7 @@
           idName="unsubEmail"
           :submitNull="email.submitNull"
           autocomplete="on"
-          @typingEmail="email.input = $event"
+          @emitEmail="email.input = $event"
         ></EmailInput>
 
         <div class="unsubscribe__form__submit">

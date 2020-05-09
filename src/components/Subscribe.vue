@@ -11,7 +11,7 @@
           idName="subEmail"
           :submitNull="email.submitNull"
           autocomplete="on"
-          @typingEmail="email.input = $event"
+          @emitEmail="email.input = $event"
         ></EmailInput>
 
         <div class="subscribe__form__interest">
@@ -249,15 +249,16 @@ label[class*="__label"] {
 }
 
 input[class*="__typing__input"],
-select[class*="__select__input"] {
+select[class*="__select__input"],
+textarea[class*="__textarea__input"] {
   background: none;
   border: none;
   border-radius: 0;
   border-bottom: 2px solid #cccccc;
   font-size: 1.6rem;
   letter-spacing: 0.2px;
-  line-height: 20px;
-  padding: 0 0 10px;
+  line-height: 15px;
+  padding: 0 0 5px;
   width: 100%;
 
   &:focus {
@@ -269,6 +270,13 @@ select[class*="__select__input"] {
   &.inputError {
     border-color: red;
   }
+}
+
+textarea[class*="__textarea__input"] {
+  resize: none;
+  overflow-y: hidden;
+  line-height: 20px;
+
 }
 
 p[class*="__input-warning"] {

@@ -47,7 +47,7 @@ const routes = [
       { path: "/returns", name: "Returns", component: Returns },
     ],
   },
-  { path: "/item", name: "item", component: Item },
+  { path: "/item/:id", name: "item", component: Item },
   { path: "*", redirect: "/" },
 ];
 

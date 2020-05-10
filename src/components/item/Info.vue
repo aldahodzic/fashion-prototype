@@ -2,70 +2,51 @@
   <section class="info__section">
     <div class="info__container">
       <header>
-        <h1 class="info__name">TWISTED KNIT SWEATER</h1>
+        <h1 class="info__name">{{ name }}</h1>
       </header>
       <div class="info__price__container">
-        <span class="info__price__tag cut">890 THB</span>
-        <span class="info__price__sale">250 THB</span>
-        <span class="info__price__discount-percentage">-70%</span>
+        <span class="info__price__tag cut">{{ price.tag }} THB</span>
+        <span class="info__price__sale">{{ price.sale }} THB</span>
+        <span class="info__price__discount-percentage"
+          >-{{ price.discount }}%</span
+        >
       </div>
       <div class="info__detail__container">
         <p class="info__detail__color">
-          <span class="info__detail__color__name">Anthracite grey</span> -
-          <span class="info__detail__color__preference">3284/762</span>
+          <span class="info__detail__color__name">{{ details.color }}</span> -
+          <span class="info__detail__color__preference">{{
+            details.preference
+          }}</span>
         </p>
         <p class="info__detail__description">
-          Long sleeve twist knit sweater featuring a high neck with decorative
-          cords.
+          {{ details.description }}
         </p>
 
         <form class="info__size__container">
           <fieldset>
             <div class="info__size__selector">
-              <div class="info__size__list">
+              <div
+                class="info__size__list"
+                v-for="size in sizes"
+                :key="size.id"
+                v-show="!sizeCollapse || size.sizeName == sizePicked.size"
+              >
                 <input
                   type="radio"
                   class="info__size__radio"
                   name="size"
-                  id="size-xs"
+                  :id="`${id}-size-${size.sizeName}`"
+                  :disabled="!size.inStock"
+                  v-model="sizePicked"
+                  :value="{ id: id, size: size.sizeName }"
+                  @click="sizeCollapse = !sizeCollapse"
                 />
-                <label for="size-xs" class="info__size__label">xs</label>
-              </div>
-              <div class="info__size__list">
-                <input
-                  type="radio"
-                  class="info__size__radio"
-                  name="size"
-                  id="size-s"
-                />
-                <label for="size-s" class="info__size__label">s</label>
-              </div>
-              <div class="info__size__list">
-                <input
-                  type="radio"
-                  class="info__size__radio"
-                  name="size"
-                  id="size-m"
-                />
-                <label for="size-m" class="info__size__label">m</label>
-              </div>
-              <div class="info__size__list">
-                <input
-                  type="radio"
-                  class="info__size__radio"
-                  name="size"
-                  id="size-l"
-                />
-                <label for="size-l" class="info__size__label">l</label>
-              </div>
-              <div class="info__size__list">
-                <input
-                  type="radio"
-                  class="info__size__radio"
-                  name="size"
-                  id="size-xl"
-                />
-                <label for="size-xl" class="info__size__label">xl</label>
+                <label
+                  :for="`${id}-size-${size.sizeName}`"
+                  class="info__size__label"
+                  :class="{ outOfStock: !size.inStock }"
+                  >{{ size.sizeName }}</label
+                >
               </div>
             </div>
             <div class="info__size__guide">
@@ -73,7 +54,12 @@
             </div>
           </fieldset>
           <div class="addCart__container">
-            <button class="addCart__btn btn-main">add</button>
+            <button
+              class="addCart__btn btn-main"
+              @click.stop.prevent="addToCart"
+            >
+              add
+            </button>
           </div>
         </form>
 
@@ -105,12 +91,60 @@
         </div>
       </div>
     </div>
+    <div class="modal__container" v-show="modalShow" @click="modalShow = false">
+      <div class="modal__box">
+        <i class="fas fa-exclamation modal__icon"></i>
+        <h3 class="modal__warning">WARNING</h3>
+        <p class="modal__prompt">
+          {{ prompt }}
+        </p>
+        <button
+          type="button"
+          class="modal__btn btn-main"
+          @click="modalShow = false"
+        >
+          ACCEPT
+        </button>
+      </div>
+    </div>
   </section>
 </template>
 
 <script>
-export default {};
+export default {
+  props: ["id", "name", "price", "details", "sizes"],
+  data() {
+    return {
+      sizePicked: "",
+      sizeCollapse: false,
+      modalShow: false,
+      prompt: "you must select a size",
+    };
+  },
+  methods: {
+    addToCart() {
+      if (!this.sizePicked) {
+        this.modalShow = true;
+      } else {
+        console.log(`${this.sizePicked.id} add to cart`);
+      }
+    },
+  },
+  // mounted() {
+  //   this.sizeAvailable();
+  // },
+};
 </script>
+
+<style lang="scss">
+.outOfStock {
+  cursor: default;
+  color: #ccc;
+  &:hover {
+    background-color: inherit !important;
+  }
+}
+</style>
 
 <style lang="scss" scoped>
 .info {
@@ -133,6 +167,7 @@ export default {};
   &__name {
     font-size: 3.2rem;
     font-weight: 700;
+    margin: 0;
   }
   &__price {
     &__container {
@@ -201,19 +236,25 @@ export default {};
       cursor: pointer;
       padding: 12px 8px;
       min-height: 16px;
-      font-size: 1.8rem;
+      font-size: 1.4rem;
       display: flex;
       align-items: flex-start;
       width: 100%;
+      margin: 0;
 
       &:hover {
         background-color: #efefef;
       }
     }
 
+    &__radio:checked + &__label {
+      font-weight: 700;
+    }
+
     &__guide {
       padding-top: 12px;
-      padding-bottom: 8px;
+      // padding-bottom: 8px;
+      padding-bottom: 12px;
 
       &__link {
         width: 100%;

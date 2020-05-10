@@ -1,10 +1,16 @@
 <template>
   <section class="item__container">
-    <itemImg></itemImg>
+    <!-- <p>{{ item }}</p> -->
 
-    <itemInfo></itemInfo>
-
-    <itemMatch></itemMatch>
+    <itemImg :images="item.images" :name="item.name"></itemImg>
+    <itemInfo
+      :id="item.id"
+      :name="item.name"
+      :price="item.price"
+      :details="item.details"
+      :sizes="item.sizes"
+    ></itemInfo>
+    <itemMatch :collections="collections"></itemMatch>
   </section>
 </template>
 
@@ -14,21 +20,20 @@ import itemInfo from "@/components/item/Info.vue";
 import itemMatch from "@/components/item/Match.vue";
 
 export default {
-  data() {
-    return {
-      product: [
-        {
-          id: "0001",
-          name: "TWISTED KNIT SWEATER",
-          price: { tag: 890, sale: 250 },
-        },
-      ],
-    };
-  },
+
   components: {
     itemImg,
     itemInfo,
     itemMatch,
+  },
+  computed: {
+    collections() {
+      return this.$store.getters.getCollections;
+    },
+    item() {
+      let collection = this.collections;
+      return collection.find(item => item.id == this.$route.params.id);
+    },
   },
 };
 </script>
@@ -41,6 +46,7 @@ export default {
     display: grid;
     grid-template-columns: 59% 1fr;
     text-transform: uppercase;
+    column-gap: 2.5%;
 
     // @media only screen and (max-width: 56.25em) {
     //   display: block;

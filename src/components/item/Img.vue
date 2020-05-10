@@ -3,9 +3,10 @@
     <div class="img__container">
       <div class="img__wrapper">
         <img
-          v-for="image in images"
+          v-for="(image, index) in images"
           :key="image.id"
           :src="require(`@/assets/img/${image}`)"
+          :alt="name + ' ' + index"
           class="img__image"
         />
       </div>
@@ -15,27 +16,12 @@
 
 <script>
 export default {
-  data() {
-    return {
-      images: [
-        "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-0.jpg",
-        "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-1.jpg",
-        "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-2.jpg",
-      ],
-    };
-  },
+  props: ["images", "name"],
 };
 </script>
 
 <style lang="scss" scoped>
 .img {
-  &__section {
-  }
-
-  &__container {
-  }
-  &__wrapper {
-  }
   &__image {
     width: 100%;
   }

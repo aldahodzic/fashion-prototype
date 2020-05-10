@@ -8,6 +8,7 @@ import Returns from "../views/info/Returns.vue";
 import Confirm from "../views/info/Confirm.vue";
 import Form from "../views/info/Form.vue";
 import FormRespond from "../views/info/FormRespond.vue";
+import Item from "../views/product/Item.vue";
 
 Vue.use(VueRouter);
 
@@ -46,6 +47,7 @@ const routes = [
       { path: "/returns", name: "Returns", component: Returns },
     ],
   },
+  { path: "/item", name: "item", component: Item },
   { path: "*", redirect: "/" },
 ];
 

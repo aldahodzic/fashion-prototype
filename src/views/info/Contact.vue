@@ -118,6 +118,7 @@
         </div>
       </li>
     </ul>
+
   </section>
 </template>
 
@@ -191,6 +192,7 @@ export default {
     hideMap() {
       this.storeUnfold = false;
     },
+
   },
   mounted() {
     const swiper = new Swiper(".swiper-container", {

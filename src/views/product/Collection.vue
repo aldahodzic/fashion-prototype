@@ -71,12 +71,14 @@
 </template>
 
 <script>
+
 export default {
   data() {
     return {
       banner: "itemBanner.jpg",
     };
   },
+
   methods: {
     numberFormat(number) {
       return Intl.NumberFormat().format(number);

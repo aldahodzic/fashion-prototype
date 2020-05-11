@@ -15,8 +15,16 @@ export default new Vuex.Store({
     subscribeDetail: { email: "", woman: false, man: false, kids: false },
     products,
     cart: [],
+    isNavHover: false,
   },
-  mutations: {},
+  mutations: {
+    NAV_IS_HOVER: state => {
+      state.isNavHover = true;
+    },
+    NAV_NOT_HOVER: state => {
+      state.isNavHover = false;
+    },
+  },
   actions: {},
   modules: {},
   getters: {
@@ -34,6 +42,9 @@ export default new Vuex.Store({
     },
     getCart: state => {
       return state.cart;
+    },
+    getNavHover: state => {
+      return state.isNavHover;
     },
   },
 });

@@ -1,5 +1,11 @@
 <template>
-  <div class="header" id="header" :class="{ headerTran: headerTran }">
+  <div
+    class="header"
+    id="header"
+    :class="{ headerTran: isNavTran, hover: isNavHover || panelOpen }"
+    @mouseenter="navIsHover"
+    @mouseleave="navNotHover"
+  >
     <div class="header__menu" @mouseenter="menuEnter" @mouseleave="menuLeave">
       <svg width="32" height="32">
         <path
@@ -52,18 +58,28 @@
         </li>
       </ul>
     </div>
+    <CollectionFilter
+      :panelOpen="panelOpen"
+      @panelOpening="panelOpen = !panelOpen"
+    ></CollectionFilter>
   </div>
 </template>
 
 <script>
 import { eventBus } from "../main";
+// import router from "../router";
+import CollectionFilter from "@/components/item/CollectionFilter.vue";
 
 export default {
   data() {
     return {
       menuHover: false,
       headerTran: false,
+      panelOpen: false,
     };
+  },
+  components: {
+    CollectionFilter,
   },
   methods: {
     menuEnter() {
@@ -92,18 +108,40 @@ export default {
       //   head.style.backgroundColor = "transparent";
       // }
     },
+    navIsHover() {
+      this.$store.commit("NAV_IS_HOVER");
+    },
+    navNotHover() {
+      this.$store.commit("NAV_NOT_HOVER");
+    },
   },
-  watch: {
-    $route: function() {
+  computed: {
+    isNavHover() {
+      return this.$store.getters.getNavHover;
+    },
+    isNavTran() {
       let routeName = this.$route.name;
       console.log(routeName);
       if (routeName == "Home" || routeName == "Collection") {
-        this.headerTran = true;
+        return true;
       } else {
-        this.headerTran = false;
+        return false;
       }
     },
   },
+
+  // watch: {
+  //   $route: function() {
+  //     let routeName = this.$route.name;
+  //     console.log(routeName);
+  //     if (routeName == "Home" || routeName == "Collection") {
+  //       this.headerTran = true;
+  //     } else {
+  //       this.headerTran = false;
+  //     }
+  //   },
+  // },
+
   created() {
     // window.addEventListener("scroll", this.handleScroll);
   },
@@ -121,12 +159,14 @@ export default {
   width: 100%;
   display: grid;
   grid-template-columns: minmax(65px, 5%) 20% 52% 23%;
+  grid-template-rows: 1fr;
   justify-items: center;
   align-items: center;
-  padding-top: 2.5rem;
-  padding-bottom: 1.5rem;
+  padding-top: 25px;
+  padding-bottom: 5px;
   overflow: hidden;
   background-color: white;
+  transition: background-color 0.3s;
 
   &.headerTran {
     background-color: transparent;
@@ -136,6 +176,10 @@ export default {
     &:hover {
       background-color: white;
     }
+  }
+
+  &.hover {
+    background-color: white;
   }
 
   span {
@@ -198,6 +242,7 @@ export default {
       }
 
       &-cart {
+        padding-top: 2px;
         &-link {
           display: block;
           text-align: center;

@@ -53,7 +53,7 @@
                 d="M12 7V6c0-1 1-2 2-2h4c1 0 2 1 2 2v1h7v19H5V7h7zm14 1H6v17h20V8zM13 6v1h6V6c0-.5-.5-1-1-1h-4c-.5 0-1 .5-1 1z"
               ></path>
             </svg>
-            <span class="header__user__menu-cart-link-item">0</span>
+            <span class="header__user__menu-cart-link-item">{{ cartNum }}</span>
           </a>
         </li>
       </ul>
@@ -122,7 +122,7 @@ export default {
     },
     isNavTran() {
       let routeName = this.$route.name;
-      console.log(routeName);
+      // console.log(routeName);
       if (routeName == "Home" || routeName == "Collection") {
         return true;
       }
@@ -133,6 +133,9 @@ export default {
         return true;
       }
       return false;
+    },
+    cartNum() {
+      return this.$store.getters.getCartNum;
     },
   },
 
@@ -159,7 +162,8 @@ export default {
 
 <style lang="scss" scoped>
 .header {
-  position: sticky;
+  // position: sticky;
+  position: fixed;
   top: 0;
   z-index: 10;
   width: 100%;

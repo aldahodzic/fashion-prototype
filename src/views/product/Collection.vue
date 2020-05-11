@@ -7,9 +7,7 @@
       />
     </div>
     <div class="collection__products__container">
-      <ul class="collection__products__wrapper"
-      
-      >
+      <ul class="collection__products__wrapper" :class="{ twoCol: twoCol }">
         <li
           class="collection__products__list"
           v-for="product in collections"
@@ -73,7 +71,6 @@
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -89,6 +86,9 @@ export default {
   computed: {
     collections() {
       return this.$store.getters.getCollections;
+    },
+    twoCol() {
+      return this.$store.getters.getCol;
     },
   },
 };
@@ -126,6 +126,10 @@ export default {
       @media only screen and (max-width: 56.25em) {
         grid-template-columns: repeat(2, 1fr);
         grid-column-gap: 15px;
+      }
+
+      &.twoCol {
+        grid-template-columns: repeat(2, 1fr);
       }
     }
     &__list {

@@ -134,13 +134,21 @@ export default {
       if (!this.sizePicked) {
         this.modalShow = true;
       } else {
-        console.log(`${this.sizePicked.id} add to cart`);
+        this.$store.commit("ADD_TO_CART", [
+          this.sizePicked.id,
+          this.sizePicked.size,
+        ]);
       }
     },
   },
-  // mounted() {
-  //   this.sizeAvailable();
-  // },
+  computed: {
+    cart() {
+      return this.$store.getters.getCart;
+    },
+    cartNum() {
+      return this.$store.getters.getCartNum;
+    },
+  },
 };
 </script>
 

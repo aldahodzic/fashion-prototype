@@ -3,8 +3,20 @@
     <div class="filter__view__container">
       <div class="filter__view__wrapper">
         <p class="filter__view__text">view</p>
-        <a class="filter__view__btn" id="twoCol">2</a>
-        <a class="filter__view__btn" id="fourCol">4</a>
+        <a
+          class="filter__view__btn"
+          id="twoCol"
+          :class="{ selected: isTwoCol }"
+          @click="twoCol"
+          >2</a
+        >
+        <a
+          class="filter__view__btn"
+          id="fourCol"
+          :class="{ selected: !isTwoCol }"
+          @click="fourCol"
+          >4</a
+        >
         <p class="filter__view__separator">|</p>
       </div>
       <div class="filter__openner__container">
@@ -137,12 +149,20 @@ export default {
     //     filter.items.forEach(item => (item.selected = true))
     //   ).length;
     // },
+    twoCol() {
+      this.$store.commit("TWO_COL");
+    },
+    fourCol() {
+      this.$store.commit("FOUR_COL");
+    },
   },
   computed: {
     isNavHover() {
       return this.$store.getters.getNavHover;
     },
-
+    isTwoCol() {
+      return this.$store.getters.getCol;
+    },
   },
 };
 </script>
@@ -184,6 +204,10 @@ export default {
       & * {
         margin-left: 18px;
       }
+    }
+
+    &__btn {
+      cursor: pointer;
     }
   }
 

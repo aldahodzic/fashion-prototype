@@ -16,7 +16,7 @@ export default new Vuex.Store({
     products,
     cart: [],
     isNavHover: false,
-    twoCol: false
+    twoCol: false,
   },
   mutations: {
     NAV_IS_HOVER: state => {
@@ -24,6 +24,15 @@ export default new Vuex.Store({
     },
     NAV_NOT_HOVER: state => {
       state.isNavHover = false;
+    },
+    ADD_TO_CART: (state, payload) => {
+      state.cart.push({ id: payload[0], size: payload[1], number: 1 });
+    },
+    TWO_COL: state => {
+      state.twoCol = true;
+    },
+    FOUR_COL: state => {
+      state.twoCol = false;
     },
   },
   actions: {},
@@ -41,11 +50,23 @@ export default new Vuex.Store({
     getCollections: state => {
       return state.products;
     },
+    getNavHover: state => {
+      return state.isNavHover;
+    },
     getCart: state => {
       return state.cart;
     },
-    getNavHover: state => {
-      return state.isNavHover;
+    getCartNum: state => {
+      let num = 0;
+      if (state.cart.length > 0) {
+        for (let i = 0; i < state.cart.length; i++) {
+          num += state.cart[i].number;
+        }
+      }
+      return num;
+    },
+    getCol: state => {
+      return state.twoCol;
     },
   },
 });

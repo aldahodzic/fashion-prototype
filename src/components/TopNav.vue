@@ -1,5 +1,5 @@
 <template>
-  <div class="header" :class="{ headerTran: headerTran }">
+  <div class="header" id="header" :class="{ headerTran: headerTran }">
     <div class="header__menu" @mouseenter="menuEnter" @mouseleave="menuLeave">
       <svg width="32" height="32">
         <path
@@ -74,16 +74,41 @@ export default {
       this.menuHover = false;
       eventBus.$emit("munuHoverUpdate", this.menuHover);
     },
+    handleScroll() {
+      // let head = document.getElementById("header");
+      // console.log(head.offsetHeight);
+
+      let head = document.getElementById("header");
+      let match = document.getElementById("match__section");
+
+      let headBound = head.getBoundingClientRect();
+      let matchBound = match.getBoundingClientRect();
+
+      console.log(headBound.bottom + ":" + matchBound.top);
+
+      // if (headBound.bottom > matchBound.top) {
+      //   head.style.backgroundColor = "white";
+      // } else {
+      //   head.style.backgroundColor = "transparent";
+      // }
+    },
   },
   watch: {
     $route: function() {
       let routeName = this.$route.name;
-      if (routeName == "Home") {
+      console.log(routeName);
+      if (routeName == "Home" || routeName == "Collection") {
         this.headerTran = true;
       } else {
         this.headerTran = false;
       }
     },
+  },
+  created() {
+    // window.addEventListener("scroll", this.handleScroll);
+  },
+  destroyed() {
+    // window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
@@ -105,6 +130,12 @@ export default {
 
   &.headerTran {
     background-color: transparent;
+
+    transition: background-color 0.3s;
+
+    &:hover {
+      background-color: white;
+    }
   }
 
   span {

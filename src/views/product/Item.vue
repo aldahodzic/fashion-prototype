@@ -10,7 +10,16 @@
       :details="item.details"
       :sizes="item.sizes"
     ></itemInfo>
-    <itemMatch :collections="collections"></itemMatch>
+    <itemMatch
+      :header="'match with'"
+      :elID="'match__section'"
+      :collections="collections"
+    ></itemMatch>
+    <itemMatch
+      :header="'similar items'"
+      :elID="'similar__section'"
+      :collections="collections"
+    ></itemMatch>
   </section>
 </template>
 
@@ -20,7 +29,6 @@ import itemInfo from "@/components/item/Info.vue";
 import itemMatch from "@/components/item/Match.vue";
 
 export default {
-
   components: {
     itemImg,
     itemInfo,

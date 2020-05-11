@@ -2,7 +2,7 @@ export default [
   {
     id: "0001",
     name: "TWISTED KNIT SWEATER",
-    price: { tag: 999, sale: 250, discount: 70 },
+    price: { tag: 1059, sale: 250, discount: 70 },
     details: {
       color: "BLUE ICE",
       preference: "3284/762",
@@ -16,7 +16,8 @@ export default [
       { sizeName: "l", inStock: false },
       { sizeName: "xl", inStock: true },
     ],
-
+    isDouble: true,
+    twoImg: false,
     images: [
       "product/t-shirt-girl/nkg62015-blue-ice/nkg62015-blue-ice-0.jpg",
       "product/t-shirt-girl/nkg62015-blue-ice/nkg62015-blue-ice-1.jpg",
@@ -41,6 +42,8 @@ export default [
       { sizeName: "l", inStock: false },
       { sizeName: "xl", inStock: true },
     ],
+    isDouble: false,
+    twoImg: false,
     images: [
       "product/t-shirt-girl/nkg62015-pink-sakura/nkg62015-pink-sakura-0.jpg",
       "product/t-shirt-girl/nkg62015-pink-sakura/nkg62015-pink-sakura-1.jpg",
@@ -62,6 +65,8 @@ export default [
       { sizeName: "l", inStock: false },
       { sizeName: "xl", inStock: true },
     ],
+    isDouble: false,
+    twoImg: false,
     images: [
       "product/t-shirt-girl/nkg62017-blue-ice/nkg62017-blue-ice-0.jpg",
       "product/t-shirt-girl/nkg62017-blue-ice/nkg62017-blue-ice-1.jpg",
@@ -83,6 +88,8 @@ export default [
       { sizeName: "m", inStock: false },
       { sizeName: "l", inStock: false },
     ],
+    isDouble: false,
+    twoImg: false,
     images: [
       "product/t-shirt-girl/nkg62017-pink-sakura/nkg62017-pink-sakura-0.jpg",
       "product/t-shirt-girl/nkg62017-pink-sakura/nkg62017-pink-sakura-1.jpg",
@@ -104,6 +111,8 @@ export default [
       { sizeName: "m", inStock: true },
       { sizeName: "l", inStock: true },
     ],
+    isDouble: false,
+    twoImg: false,
     images: [
       "product/t-shirt-girl/nkg63001-white/nkg63001-white-0.jpg",
       "product/t-shirt-girl/nkg63001-white/nkg63001-white-1.jpg",
@@ -127,10 +136,12 @@ export default [
       { sizeName: "m", inStock: true },
       { sizeName: "l", inStock: true },
     ],
+    isDouble: true,
+    twoImg: true,
     images: [
       "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-0.jpg",
       "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-1.jpg",
-      "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-.jpg",
+      "product/t-shirt-girl/nkg63001-yellow-corn/nkg63001-yellow-corn-2.jpg",
     ],
   },
 ];

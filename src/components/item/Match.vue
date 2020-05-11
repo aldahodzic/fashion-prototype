@@ -1,8 +1,8 @@
 <template>
-  <section class="match__section">
+  <section class="match__section" :id="elID">
     <div class="match__container">
-      <h1 class="match__header">match with</h1>
-      <p class="match__count">3 items</p>
+      <h1 class="match__header">{{ header }}</h1>
+      <p class="match__count">{{ collections.length - 1 }} items</p>
     </div>
     <div class="swiper-container match__swiper__container">
       <div class="swiper-wrapper match__swiper__wrapper">
@@ -17,16 +17,6 @@
             :sizes="item.sizes"
           ></MatchList>
         </template>
-
-        <!-- <MatchList
-          v-for="item in collections"
-          :key="item.id"
-          :image="item.images[0]"
-          :id="item.id"
-          :name="item.name"
-          :price="item.price"
-          :sizes="item.sizes"
-        ></MatchList> -->
       </div>
     </div>
   </section>
@@ -37,7 +27,7 @@ import Swiper from "swiper/js/swiper.esm.bundle";
 import MatchList from "@/components/item/SecondItem.vue";
 
 export default {
-  props: ["collections"],
+  props: ["header", "elID", "collections"],
   data() {
     return {};
   },
@@ -52,6 +42,7 @@ export default {
     });
     return swiperMatch;
   },
+  watch: {},
 };
 </script>
 

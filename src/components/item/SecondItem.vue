@@ -10,13 +10,17 @@
     <div class="secondItem__swiper__info">
       <span class="secondItem__swiper__info__name">{{ name }}</span>
       <div class="secondItem__swiper__info__price">
-        <span class="secondItem__swiper__info__price__tag cut"
-          >{{ price.tag }} THB</span
+        <span
+          class="secondItem__swiper__info__price__tag"
+          :class="{ cut: price.sale }"
+          >{{ numberFormat(price.tag) }} THB</span
         >
-        <span class="secondItem__swiper__info__price__sale"
-          >{{ price.sale }} THB</span
+        <span class="secondItem__swiper__info__price__sale" v-if="price.sale"
+          >{{ numberFormat(price.sale) }} THB</span
         >
-        <span class="secondItem__swiper__info__price__discount-percentage"
+        <span
+          class="secondItem__swiper__info__price__discount-percentage"
+          v-if="price.discount"
           >-{{ price.discount }}%</span
         >
       </div>
@@ -118,6 +122,9 @@ export default {
     };
   },
   methods: {
+    numberFormat(number) {
+      return Intl.NumberFormat().format(number);
+    },
     addToCart() {
       if (!this.sizePicked) {
         this.modalShow = true;
@@ -160,6 +167,10 @@ export default {
 
         &__tag {
           margin-right: 8px;
+
+          &.cut {
+            text-decoration: line-through;
+          }
         }
         &__sale {
           color: red;

@@ -1,11 +1,19 @@
 <template>
   <div class="swiper-container">
     <div class="swiper-wrapper">
-      <picture class="swiper-slide" v-for="slide in slides" :key="slide.id">
-        <source media="(orientation: portrait)" :srcset="slide[0]" />
-        <source media="(orientation: landscape)" :srcset="slide[1]" />
-        <img :src="slide[1]" />
-      </picture>
+      <router-link
+        :to="{ name: 'Collection' }"
+        tag="a"
+        v-for="slide in slides"
+        :key="slide.id"
+        class="swiper-slide"
+      >
+        <picture>
+          <source media="(orientation: portrait)" :srcset="slide[0]" />
+          <source media="(orientation: landscape)" :srcset="slide[1]" />
+          <img :src="slide[1]" />
+        </picture>
+      </router-link>
     </div>
   </div>
 </template>

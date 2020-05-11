@@ -16,6 +16,7 @@ export default new Vuex.Store({
     products,
     cart: [],
     isNavHover: false,
+    twoCol: false
   },
   mutations: {
     NAV_IS_HOVER: state => {

@@ -7,7 +7,9 @@
       />
     </div>
     <div class="collection__products__container">
-      <ul class="collection__products__wrapper">
+      <ul class="collection__products__wrapper"
+      
+      >
         <li
           class="collection__products__list"
           v-for="product in collections"

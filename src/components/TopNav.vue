@@ -61,6 +61,7 @@
     <CollectionFilter
       :panelOpen="panelOpen"
       @panelOpening="panelOpen = !panelOpen"
+      v-if="isCollection"
     ></CollectionFilter>
   </div>
 </template>
@@ -124,9 +125,14 @@ export default {
       console.log(routeName);
       if (routeName == "Home" || routeName == "Collection") {
         return true;
-      } else {
-        return false;
       }
+      return false;
+    },
+    isCollection() {
+      if (this.$route.name == "Collection") {
+        return true;
+      }
+      return false;
     },
   },
 

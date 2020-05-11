@@ -17,3 +17,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scope>
+.home {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+</style>

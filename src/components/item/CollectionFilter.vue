@@ -1,10 +1,4 @@
 <template>
-  <!-- <div
-    class="filter__container"
-    :class="{ hover: isNavHover }"
-    @mouseenter="navIsHover"
-    @mouseleave="navNotHover"
-  > -->
   <div class="filter__container">
     <div class="filter__view__container">
       <div class="filter__view__wrapper">
